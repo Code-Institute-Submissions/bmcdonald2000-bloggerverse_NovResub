@@ -1,6 +1,17 @@
 # django imports
 from django import forms
-from .models import Post, comment
+from .models import Post, comment, Category
+
+
+# creates a query that finds all the category names from the Category model
+options = Category.objects.all().values_list('name', 'name')
+
+# creates a categories lists
+categories_list = []
+
+# any new items are added to the list
+for item in options:
+    categories_list.append(item)
 
 
 # creates a form for the posts using a model
