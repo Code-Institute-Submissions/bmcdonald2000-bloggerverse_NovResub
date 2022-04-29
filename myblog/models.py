@@ -10,7 +10,7 @@ from datetime import datetime
 class Post(models.Model):
     title = models.CharField(max_length=255)
     # RichTextField gives user all the tool style their post
-    image = models.ImageField(null=True, blank=True, upload_to="media/images/")
+    image = models.ImageField(null=True, blank=True, upload_to="images/")
     body = RichTextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     summary = models.CharField(max_length=255)
