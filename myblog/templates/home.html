@@ -17,7 +17,14 @@
             <!-- boostrap card -->
             <div class="card">
                 <div class="card border-secondary ">
-                        <!-- boostrap card body -->
+                    <!-- If the blog post has an image that image is displayed --> 
+                    {% if Post.image %}
+                        <img class="card-img-top" src="{{ Post.image.url }}" style="max-height: 500px" alt=" blog image ">
+                    <!-- else the default image is used --> 
+                    {% else %}
+                        <img class="card-img-top" src="{{'/static/images/post.jpg'}}" style="max-height: 500px" alt=" blog image ">
+                    {% endif %}
+                    <!-- boostrap card body -->
                         <div class="card-body">
                             <h5 class="card-title">
                                 <!-- makes the blog title a link by using django url. '|title' capitalises first letter of the title --> 
@@ -29,7 +36,7 @@
                             <!-- creates a divider  -->
                             <hr>
                             <!-- displays post authors name, date of post and number of likes -->
-                            <p class="card-text">by {{Post.author.first_name}} {{Post.author.last_name}} </p>
+                            <p class="card-text">by {{Post.author.first_name}} {{Post.author.last_name}} - {{ Post.date }} </p>
                             <small>
                                 <!-- Logged in user can edit and delete their own posts --> 
                                 {% if user.is_authenticated %}
