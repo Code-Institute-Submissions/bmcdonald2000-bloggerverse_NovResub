@@ -1,4 +1,5 @@
 # django imports
+from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic import DetailView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
@@ -15,7 +16,19 @@ class HomeView(ListView):
 
     # using html template to display blog post on the home page
     template_name = 'home.html'
+    
+    # post apprear in date order (recent first)
+    ordering = ['-date']
 
+    # post category is visible on the home page
+    category = Category.objects.all()
+
+    # displays the categories used in the dropdown menu
+    def get_context_data(self, *args, **kwargs):
+        category_menu = Category.objects.all()
+        context = super(homeView, self).get_context_data(*args, **kwargs)
+        context["category_menu"] = category_menu
+        return context
 
 # displays add post page using django CreateView
 class AddPostView(SuccessMessageMixin, CreateView):
@@ -108,3 +121,18 @@ class AddCategoryView(SuccessMessageMixin, CreateView):
 
     # adds a message if the form is successful using SuccessMessageMixin
     success_message = " We have added your category to the Bloggerverse"
+
+
+# function to display the hyperlinked categories on the category page
+def CategoryListView(request):
+    category_list = Category.objects.all()
+    return render(request, 'category_list.html',
+                  {'category_list': category_list})
+
+
+# function to slugify category page
+def CategoryView(request, category):
+    post_category = Post.objects.filter(category=category.replace('-', ' '))
+    return render(request, 'category_pages.html',
+                  {'category': category.replace('-', ' ').title(),
+                   'post_category': post_category})
