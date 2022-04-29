@@ -30,6 +30,14 @@
                             <hr>
                             <!-- displays post authors name, date of post and number of likes -->
                             <p class="card-text">by {{Post.author.first_name}} {{Post.author.last_name}} </p>
+                            <small>
+                                <!-- Logged in user can edit and delete their own posts --> 
+                                {% if user.is_authenticated %}
+                                    {% if user.id == Post.author.id %}
+                                        <a href="{% url 'edit' Post.pk %}" target="_blank">Edit</a>
+                                    {% endif %}
+                                {% endif %}
+                            </small>
                         </div>
                 </div>
             </div>

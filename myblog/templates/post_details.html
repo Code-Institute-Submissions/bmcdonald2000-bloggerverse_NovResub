@@ -16,17 +16,27 @@
         {{ post.author.last_name|title }}
         - {{ post.date }}
         <br/> 
-    <hr>
-    <!-- If an image is uploaded witht he post, this will also be displayed -->
-    {% if post.image %}
-        <img src="{{ post.image.url }}" width="300px" height="300px">
-        <br><br/>
-    {% endif %}
-    {{ post.body|safe }}
+        <!-- post category hyperlinked to display all post in that category. '|slugify' converts blank spaces between words into '-' to maintain good coding practices  -->  
+        <small><a href="{% url 'category_page' post.category|slugify %}" target="_blank">{{post.category|title}}</a> <i class="bi bi-tags-fill"></i></small>
 
-    <br><br/>
-    <!-- Home button -->
-    <a href="{% url 'home' %}"><button class="btn btn-info" style="background-color: #e5c6a0; border: #e5c6a0; color: #000000;"><i class="bi bi-arrow-left" alt="" width="80" height="24" class="d-inline-block align-text-top"></i> Back</button></a>
-    <br><br/>
+            {% if user.is_authenticated %}
+                <!-- If the author is viewing their own posst they will be able to edit or delete that post-->
+                {% if user.id == post.author.id %}
+                    <a href="{% url 'edit' post.pk %}" target="_blank" >Edit</a> |
+                {% endif %}
+            {% endif %}
+        </small><br/>
+        <hr>
+        <!-- If an image is uploaded witht he post, this will also be displayed -->
+        {% if post.image %}
+            <img src="{{ post.image.url }}" width="300px" height="300px">
+            <br><br/>
+        {% endif %}
+        {{ post.body|safe }}
+
+        <br><br/>
+        <!-- Home button -->
+        <a href="{% url 'home' %}"><button class="btn btn-info" style="background-color: #e5c6a0; border: #e5c6a0; color: #000000;"><i class="bi bi-arrow-left" alt="" width="80" height="24" class="d-inline-block align-text-top"></i> Back</button></a>
+        <br><br/>
 
 {% endblock %}
