@@ -36,3 +36,21 @@ class comment(models.Model):
     # function to return data as string in the django admin
     def __str__(self):
         return '%s - %s' % (self.post.title, self.name)
+
+
+# fields and behaviours for Category model
+class Category(models.Model):
+    # prevents duplicates
+    name = models.CharField(max_length=70, unique=True)
+
+    # categories are displayed in the admin section
+    def __str__(self):
+        return self.name
+
+    # returns user to the add posts page so they can upload a post in the catehory they created
+    def get_absolute_url(self):
+        return reverse('posts')
+
+    # changes 'Categorys' to Categories in the admin section
+    class Meta:
+        verbose_name_plural = "Categories"
