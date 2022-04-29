@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myblog',
     'users',
+    'ckeditor'
 ]
 
 MIDDLEWARE = [
@@ -139,6 +140,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# customised CKEDITOR for richtext field to make it responsive
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'basic',
+        'height': '300',
+        'width': 'auto',
+    },
+}
 
 # django-heroku updates variables in my local namespace based on my project layout and environment variables
 
