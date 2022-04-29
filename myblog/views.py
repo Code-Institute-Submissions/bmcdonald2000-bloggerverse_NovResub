@@ -1,9 +1,10 @@
 # django imports
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic import DetailView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 from .models import Post, comment, Category
 from .forms import PostForms, EditForm, CommentForm
 
@@ -60,8 +61,19 @@ class postView(DetailView):
     def get_context_data(self, *args, **kwargs):
         category_menu = Category.objects.all()
         context = super(postView, self).get_context_data(*args, **kwargs)
+        
+        # displays the number of likes a post has
+        x = get_object_or_404(Post, id=self.kwargs['pk'])
+        num_likes = x.num_likes()
+
+        # stops the user from liking the same post twice
+        liked = False
+        if x.like.filter(id=self.request.user.id).exists():
+            liked = True
 
         context["category_menu"] = category_menu
+        context["num_likes"] = num_likes
+        context["liked"] = liked
         return context
 
 
@@ -145,3 +157,21 @@ def CategoryView(request, category):
     return render(request, 'category_pages.html',
                   {'category': category.replace('-', ' ').title(),
                    'post_category': post_category})
+
+
+# function to show post likes
+def LikePostView(request, pk):
+
+    # when a post is liked, the post id will be saved to the database.
+    liked_post = get_object_or_404(Post, id=request.POST.get('like_id'))
+    liked = False
+
+    # like button changes to dislike after it has been liked
+    if liked_post.like.filter(id=request.user.id).exists():
+            liked_post.like.remove(request.user)
+            liked = False
+    else:
+            liked_post.like.add(request.user)
+            liked = True
+
+    return HttpResponseRedirect(reverse('details', args=[str(pk)]))
