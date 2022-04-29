@@ -42,6 +42,10 @@
         </div>
         <!-- line breaks -->
         <br><br><br><br>
-        
+        <!-- JS that tells the backend which user is creating the post -->
+        <script>
+            var name = "{{ user.id }}";
+            document.getElementById("username").value = name;
+        </script>
     {% endif %}
 {% endblock%}
