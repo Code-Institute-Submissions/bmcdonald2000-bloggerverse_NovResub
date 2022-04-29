@@ -15,3 +15,7 @@ class Post(models.Model):
     # function for admin page to view post title and author
     def __str__(self):
         return self.title + ' | ' + str(self.author)
+    
+    # function to redirect user to view the post they just made
+    def get_absolute_url(self):
+        return reverse('details', args=[str(self.id)])
