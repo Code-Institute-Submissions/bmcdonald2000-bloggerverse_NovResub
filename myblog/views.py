@@ -1,9 +1,9 @@
 # django imports
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic import DetailView
 from django.contrib.messages.views import SuccessMessageMixin
 from .models import Post
-from .forms import PostForms
+from .forms import PostForms, EditForm
 
 
 # displays blog posts on the home page in a list
@@ -40,3 +40,19 @@ class postView(DetailView):
 
     # using html template to display post
     template_name = 'post_details.html'
+
+
+# displays edit post page using django UpdateView
+class EditPostView(SuccessMessageMixin, UpdateView):
+
+    # using Post model
+    model = Post
+
+    # using EditForm
+    form_class = EditForm
+
+    # using html template to display edit post page
+    template_name = 'edit.html'
+
+    # adds a message if the form is success using SuccessMessageMixin
+    success_message = " Awesome !! your blog has been updated "
