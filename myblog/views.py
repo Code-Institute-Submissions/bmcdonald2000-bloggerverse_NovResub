@@ -1,5 +1,6 @@
 # django imports
 from django.views.generic import ListView, CreateView
+from django.views.generic import DetailView
 from django.contrib.messages.views import SuccessMessageMixin
 from .models import Post
 from .forms import PostForms
@@ -29,3 +30,13 @@ class AddPostView(SuccessMessageMixin, CreateView):
 
     # adds a message if the form is success using SuccessMessageMixin
     success_message = " Thank you for adding your post to the Bloggerverse"
+
+
+# displays view post page using django DetailView
+class postView(DetailView):
+
+    # using Post model
+    model = Post
+
+    # using html template to display post
+    template_name = 'post_details.html'
