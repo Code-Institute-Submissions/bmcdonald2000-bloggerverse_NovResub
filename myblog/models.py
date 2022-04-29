@@ -47,7 +47,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    # returns user to the add posts page so they can upload a post in the catehory they created
+    # returns user to the add posts page so they can upload a post
     def get_absolute_url(self):
         return reverse('posts')
 
