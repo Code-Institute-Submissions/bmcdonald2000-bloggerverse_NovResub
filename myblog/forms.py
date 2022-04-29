@@ -1,10 +1,10 @@
 # django imports
 from django import forms
-from .models import Post, comment
+from .models import Post, comment, Category
 
-options = [('law', 'law'), ('coding', 'coding'), ('travel, travel')]
+# options = [('law', 'law'), ('coding', 'coding')]
 # creates a query of names from the Category model
-# options = Category.objects.all().values_list('name', 'name')
+options = Category.objects.all().values_list('name', 'name')
 
 # creates a categories lists
 categories_list = []
