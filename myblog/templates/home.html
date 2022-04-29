@@ -22,7 +22,7 @@
                         <img class="card-img-top" src="{{ Post.image.url }}" style="max-height: 500px" alt=" blog image ">
                     <!-- else the default image is used --> 
                     {% else %}
-                        <img class="card-img-top" src="{{'/static/images/post.jpg'}}" style="max-height: 500px" alt=" blog image ">
+                        <img class="card-img-top" src="{{'static/images/post.jpg'}}" style="max-height: 500px" alt=" blog image ">
                     {% endif %}
                     <!-- boostrap card body -->
                         <div class="card-body">
@@ -41,7 +41,7 @@
                                 <!-- Logged in user can edit and delete their own posts --> 
                                 {% if user.is_authenticated %}
                                     {% if user.id == Post.author.id %}
-                                        <a href="{% url 'edit' Post.pk %}" target="_blank">Edit</a>
+                                        <a href="{% url'edit'Post.pk %}" target="_blank">Edit</a>
                                     {% endif %}
                                 {% endif %}
                             </small>
