@@ -14,42 +14,45 @@
     <br/>
     <!-- All posts are displayed on bootstrap cards --> 
     {% for Post in object_list %}
-            <!-- boostrap card -->
-            <div class="card">
-                <div class="card border-secondary ">
-                    <!-- If the blog post has an image that image is displayed --> 
-                    {% if Post.image %}
-                        <img class="card-img-top" src="{{ Post.image.url }}" style="max-height: 500px" alt=" blog image ">
-                    <!-- else the default image is used --> 
-                    {% else %}
-                        <img class="card-img-top" src="{{'/static/images/post.jpg'}}" style="max-height: 500px" alt=" blog image ">
-                    {% endif %}
+        <!-- boostrap card -->
+        <div class="card">
+            <div class="card border-secondary ">
+                <!-- If the blog post has an image that image is displayed --> 
+                {% if Post.image %}
+                    <img class="card-img-top" src="{{ Post.image.url }}" style="max-height: 500px" alt=" blog image ">
+                <!-- else the default image is used --> 
+                {% else %}
+                    <img class="card-img-top" src="{{'/static/images/post.jpg'}}" style="max-height: 500px" alt=" blog image ">
+                {% endif %}
                     <!-- boostrap card body -->
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                <!-- makes the blog title a link by using django url. '|title' capitalises first letter of the title --> 
-                                <a href="{% url 'details' Post.pk %}" target="_blank">{{Post.title|title}}</a> 
-                            </h5>
-                            <!-- post summary is displayed --> 
-                            <p2>{{Post.summary}}</p>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <!-- makes the blog title a link by using django url. '|title' capitalises first letter of the title --> 
+                            <a href="{% url 'details' Post.pk %}" target="_blank">{{Post.title|title}}</a> 
+                        </h5>
+                        <!-- post summary is displayed --> 
+                        <p2>{{Post.summary}}</p>
 
-                            <!-- creates a divider  -->
-                            <hr>
-                            <!-- displays post authors name, date of post and number of likes -->
-                            <p class="card-text">by {{Post.author.first_name}} {{Post.author.last_name}} - {{ Post.date }} </p>
-                            <small>
-                                <!-- Logged in user can edit and delete their own posts --> 
-                                {% if user.is_authenticated %}
-                                    {% if user.id == Post.author.id %}
-                                        <a href="{% url 'edit' Post.pk %}" target="_blank">Edit</a> |
-                                        <a href="{% url 'delete' Post.pk %}" target="_blank">Delete</a>
-                                    {% endif %}
+                        <!-- post category hyperlinked to display all post in that category. '|slugify' converts blank spaces between words into '-' to maintain good coding practices  -->  
+                        <small><a href="{% url 'category_page' Post.category|slugify %}" target="_blank">{{Post.category|title}}</a> <i class="bi bi-tags-fill"></i></small>
+
+                        <!-- creates a divider  -->
+                        <hr>
+                        <!-- displays post authors name, date of post and number of likes -->
+                        <p class="card-text">by {{Post.author.first_name}} {{Post.author.last_name}} - {{ Post.date }} - {{ num_likes }} likes </p>
+                        <small>
+                            <!-- Logged in user can edit and delete their own posts --> 
+                            {% if user.is_authenticated %}
+                                {% if user.id == Post.author.id %}
+                                    <a href="{% url 'edit' Post.pk %}" target="_blank">Edit</a> |
+                                    <a href="{% url 'delete' Post.pk %}" target="_blank">Delete</a>
                                 {% endif %}
-                            </small>
-                        </div>
-                </div>
+                            {% endif %}
+                        </small>
+                    </div>
             </div>
-            <br>
+        </div>
+        <br>
     {% endfor%}
     <br><br><br><br><br/>
 {% endblock %}
