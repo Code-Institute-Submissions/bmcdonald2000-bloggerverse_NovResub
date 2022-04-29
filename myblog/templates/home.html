@@ -28,7 +28,7 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 <!-- makes the blog title a link by using django url. '|title' capitalises first letter of the title --> 
-                                <a href="#" target="_blank">{{Post.title|title}}</a> 
+                                <a href="% url 'details' Post.pk %" target="_blank">{{Post.title|title}}</a> 
                             </h5>
                             <!-- post summary is displayed --> 
                             <p2>{{Post.summary}}</p>
