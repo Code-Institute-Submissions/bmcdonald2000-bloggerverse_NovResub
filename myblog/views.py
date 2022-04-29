@@ -26,7 +26,7 @@ class HomeView(ListView):
     # displays the categories used in the dropdown menu
     def get_context_data(self, *args, **kwargs):
         category_menu = Category.objects.all()
-        context = super(homeView, self).get_context_data(*args, **kwargs)
+        context = super(HomeView, self).get_context_data(*args, **kwargs)
         context["category_menu"] = category_menu
         return context
 
