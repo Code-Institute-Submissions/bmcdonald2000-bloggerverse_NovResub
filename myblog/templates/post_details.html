@@ -34,6 +34,45 @@
         <br><br/>
         <!-- Home button -->
         <a href="{% url 'home' %}"><button class="btn btn-info" style="background-color: #e5c6a0; border: #e5c6a0; color: #000000;"><i class="bi bi-arrow-left" alt="" width="80" height="24" class="d-inline-block align-text-top"></i> Back</button></a>
+        
         <br><br/>
-
+        <hr>
+        <br/>
+        <form action="{% url 'like' post.pk %}" method="POST">
+            {% csrf_token %}
+            <!-- The logged in users are able to like posts, once liked they are able to dislike -->
+            {% if user.is_authenticated %}
+                {% if liked %}
+                        <button type="submit", class= "btn btn-danger btn-sm", name= "like_id", value="{{ post.id }}">Dislike</button>
+                {% else %}
+                        <button type="submit", class= "btn btn-primary btn-sm", name= "like_id", value="{{ post.id }}">Like</button> 
+                {% endif %}
+            {% else %} 
+                <!-- If a user is viewing the post but hasn't logged in they would be prompted to do so -->
+                <small> <a href="{% url 'login' %}" target="_blank">login</a> to like this post</small> 
+            {% endif %}
+            <!-- The number of likes are displayed below each post -->
+            - {{ num_likes }} likes
+        </form>
+        <br><br/>
+        <h2>Comments</h2>
+        <!-- The user is prompted to leave a comment if there are no comments -->
+        {% if not post.comments.all %}
+    
+            No comments yet, be the first to <a href="{% url 'add_comment' post.pk %}" target="_blank">add one</a>
+    
+        {% else %}
+        <!-- When a post has comments they will all be displayed below the post-->
+            {% for comment in post.comments.all %}
+                <br/>
+                {{ comment.body }}
+                <br/>
+                <small><strong>{{ comment.name }} - {{ comment.date }}</strong></small>
+            {% endfor %}
+            <br><br/>
+            <!-- All users will be able to add there own comments -->
+            <a href="{% url 'add_comment' post.pk %}" target="_blank" >Add a comment</a>
+        {% endif %}
+        <hr>
+        <br/>
 {% endblock %}
