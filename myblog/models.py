@@ -16,10 +16,19 @@ class Post(models.Model):
     category = models.CharField(max_length=70, default='law')
     summary = models.CharField(max_length=255)
     date = models.DateField(default=datetime.now)
+    like = models.ManyToManyField(User, related_name='blog_post')
 
     # function for admin page to view post title and author
     def __str__(self):
         return self.title + ' | ' + str(self.author)
+
+    # function to redirect user to view the post they just made
+    def get_absolute_url(self):
+        return reverse('details', args=[str(self.id)])
+    
+    # function for number of likes
+    def num_likes(self):
+        return self.like.count()
 
     # function to redirect user to view the post they just made
     def get_absolute_url(self):
