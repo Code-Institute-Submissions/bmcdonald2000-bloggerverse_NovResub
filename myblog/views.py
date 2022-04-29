@@ -1,7 +1,8 @@
 # django imports
 from django.views.generic import ListView, CreateView, UpdateView
-from django.views.generic import DetailView
+from django.views.generic import DetailView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
 from .models import Post
 from .forms import PostForms, EditForm
 
@@ -56,3 +57,19 @@ class EditPostView(SuccessMessageMixin, UpdateView):
 
     # adds a message if the form is success using SuccessMessageMixin
     success_message = " Awesome !! your blog has been updated "
+
+
+# displays delte post page using django DeleteView
+class DeletePostView(SuccessMessageMixin, DeleteView):
+
+    # using Post model
+    model = Post
+
+    # using html template to display delete post page
+    template_name = 'delete.html'
+
+    # if post is deleted user is returned the homepage
+    success_url = reverse_lazy('home')
+
+    # adds a message if the form is success using SuccessMessageMixin
+    success_message = " Your post was deleted from the Bloggerverse "
