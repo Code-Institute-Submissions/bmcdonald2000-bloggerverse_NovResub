@@ -23,7 +23,7 @@ class PostForms(forms.ModelForm):
         # using Post model
         model = Post
         # fields that will be used for the form
-        fields = ('title', 'author', 'image', 'body', 'category', 'summary')
+        fields = ('title', 'author', 'image', 'body', 'Category', 'summary')
 
         # basic controls/styling for the form fields
         widgets = {

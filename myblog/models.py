@@ -13,6 +13,7 @@ class Post(models.Model):
     image = models.ImageField(null=True, blank=True, upload_to="images/")
     body = RichTextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.CharField(max_length=70, default='law')
     summary = models.CharField(max_length=255)
     date = models.DateField(default=datetime.now)
 
@@ -41,7 +42,7 @@ class comment(models.Model):
 # fields and behaviours for Category model
 class Category(models.Model):
     # prevents duplicates
-    name = models.CharField(max_length=70, unique=True, default='law')
+    name = models.CharField(max_length=70, unique=True)
 
     # categories are displayed in the admin section
     def __str__(self):
