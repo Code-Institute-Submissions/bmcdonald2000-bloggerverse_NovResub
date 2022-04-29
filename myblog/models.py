@@ -41,7 +41,7 @@ class comment(models.Model):
 # fields and behaviours for Category model
 class Category(models.Model):
     # prevents duplicates
-    name = models.CharField(max_length=70, unique=True, default=law)
+    name = models.CharField(max_length=70, unique=True, default='law')
 
     # categories are displayed in the admin section
     def __str__(self):
