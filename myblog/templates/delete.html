@@ -1,0 +1,42 @@
+<!-- Extends the base template -->
+{% extends 'base.html' %}
+
+<!-- Template title -->
+{% block title%} Delete {% endblock %}
+
+<!-- Template content -->
+{% block content %}
+    <!-- line break -->
+    <br/>
+        <br><br/>
+        <!-- delete form is displayed as a card -->
+        <div class="card">
+
+            <!-- boostrap black border -->
+            <div class="card border-secondary ">
+                <!-- boostrap card body -->
+                <div class="card-body">
+                    <!-- card title -->
+                    <h1 class="card-title" id="heading">
+                        Delete: <strong style="color: #ff3131;">{{ post.title|title}}</strong> 
+                    </h1>
+                    <!-- horizontal line -->
+                    <hr>
+                    <!-- line break -->
+                    <br><br/>
+                    <!-- post summary is displayed --> 
+                    <p2>{{post.body|safe}}</p>
+                    <br><br/>
+                    <!-- delete post from -->
+                    <div class="form-group">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <i class="bi bi-exclamation-triangle-fill" style="color: #ff3131;"></i> <strong>THIS CAN'T BE UNDONE !!!</strong> <i class="bi bi-exclamation-triangle-fill" style="color: rgb(255, 49, 49);"></i> <br><br/>
+                            <button class="btn btn-info"style="background-color: #e5c6a0; border: #e5c6a0; color: #000000;"><i class="bi bi-trash-fill"></i> Delete</button>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <!-- line break -->
+        <br><br/>
+{% endblock %}
