@@ -7,6 +7,8 @@
 <!-- Template content -->
 {% block content %}
 <br/>
+    {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
             <!-- boostrap card -->
             <div class="card">
                 <!-- boostrap card body -->
@@ -28,8 +30,8 @@
                     </div>
                 </div>
             </div>
+        {% endif %}
             <!-- line break -->
             <br/><br/><br/>
     {% endif %}
-
 {% endblock %}
