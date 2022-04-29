@@ -22,7 +22,7 @@ class PostForms(forms.ModelForm):
         # using Post model
         model = Post
         # fields that will be used for the form
-        fields = ('title', 'author', 'image', 'body', 'summary')
+        fields = ('title', 'author', 'image', 'body', 'category', 'summary')
 
         # basic controls/styling for the form fields
         widgets = {
@@ -31,6 +31,8 @@ class PostForms(forms.ModelForm):
                                             'Enter post title'}),
             'author': forms.TextInput(attrs={'value': '', 'id': 'username',
                                              'type': 'hidden'}),
+            'Category': forms.Select(choices=options,
+                                     attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
             'summary': forms.Textarea(attrs={'class': 'form-control'}),
         }
