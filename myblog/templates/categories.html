@@ -1,0 +1,60 @@
+<!-- Extends the base template -->
+{% extends 'base.html' %}
+
+<!-- Template title -->
+{% block title%} Add Category {% endblock %}
+
+<!-- Template content-->
+{% block content %}
+    <!-- For all users who are logged in and wish to add a category, they will see the category form. -->
+    {% if user.is_authenticated %}
+        <!-- Line break -->
+        <br/><br/><br/><br/>
+        <div class="card border-secondary">
+            <!-- Line break -->
+            <br/>
+            <!-- page header -->
+            <h1 class=" card-title" id="heading">Add Your Category</h1>
+            <hr>
+            <!-- Line break -->
+            <br/>
+                <div class="card-body">
+                    <div class="form-group">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <!-- Line break -->
+                            <br/>
+                            <button class="btn btn-info" style="background-color: #e5c6a0; border: #e5c6a0; color: #000000;"><i class="bi bi-plus-circle"></i> Add </button>
+                        </form>
+                    </div>
+                    <!-- Line break -->
+                    <br/><br/>
+                    <!-- horizontal line to dived the information -->
+                    <hr>
+                    You can name your category anything you want !!
+                    <!-- Line break -->
+                    <br/>
+                </div>
+        </div>
+        <!-- Line break -->
+        <br/><br/><br/>
+    {% else %}
+        
+        <!-- div makes it easier to style icon -->
+        <div class="stop">
+            <!-- boostrap stop icon -->
+            <i class="bi bi-slash-circle-fill"></i>
+        </div>
+
+        <!-- Line break -->
+        <br/><br/><br/>
+
+        <!-- For any user who is not logged in and manages to access this page they will be propmented to login-->
+        <h1>You need to <a href="{% url 'login' %}">login</a> or <a href="{% url 'sign_up' %}">signup</a>  to access this page.</h1>
+        
+        <!-- Line break -->
+        <br/><br/><br/>
+    {% endif %}
+
+{% endblock %}
