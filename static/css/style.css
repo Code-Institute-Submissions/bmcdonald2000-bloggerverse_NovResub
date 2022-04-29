@@ -1,0 +1,33 @@
+/* imports the google font space mono */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+
+/* adds google  font space mono to all body text */
+body{
+    font-family: 'Space Mono', monospace;
+}
+/* all text with id 'heading' is centred */
+#heading{
+    text-align: center;
+}
+
+/* all icons with id 'icon' are black and 30px */
+#icons{
+    font-size: 30px;
+    color: #000;
+    
+}
+
+/* styles the footer */
+footer{
+    /* beige background */
+    background-color: #e5c6a0;
+    /* always full width of the page */
+    width: 100%;
+    
+    /* always at the bottom of the page */
+    bottom: 0px;
+    position: fixed;
+    
+    /* all fotter text is displyed in the center */
+    text-align: center;
+}
