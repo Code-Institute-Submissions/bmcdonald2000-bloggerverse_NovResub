@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import HomeView, postView, AddPostView
 from .views import EditPostView, DeletePostView
+from .views import CommentView
 
 # Sets the url pattern for each page.
 urlpatterns = [
@@ -10,4 +11,6 @@ urlpatterns = [
     path('Posts/Edit/<int:pk>', EditPostView.as_view(), name='edit'),
     path('Posts/<int:pk>/deletePost/',
          DeletePostView.as_view(), name='delete'),
+    path('Posts/<int:pk>/add_comment/',
+         CommentView.as_view(), name='add_comment'),
 ]
