@@ -2,9 +2,10 @@
 from django import forms
 from .models import Post, comment, Category
 
+options = [('law', 'law')]
 
-# creates a query that finds all the category names from the Category model
-options = Category.objects.all().values_list('name', 'name')
+# creates a query of names from the Category model
+#options = Category.objects.all().values_list('name', 'name')
 
 # creates a categories lists
 categories_list = []
