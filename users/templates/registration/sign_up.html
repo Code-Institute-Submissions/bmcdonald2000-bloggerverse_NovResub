@@ -1,0 +1,37 @@
+<!-- Extends the base template -->
+{% extends 'base.html' %}
+
+<!-- Template title -->
+{% block title%} Signup {% endblock %}
+
+<!-- Template content-->
+{% block content %}
+    <br/>
+    <!-- line break -->
+    <br/>
+    <!-- boostrap card -->
+    <div class="card">
+        <!-- boostrap card body -->
+        <div class="card-body">
+            <!-- card title -->
+            <h1 id="heading" class="card-title"> Join The Bloggervese </h1>
+            <!-- horizontal line -->
+            <hr>
+            <!-- Sign up form  -->
+            <div class="form-group">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-info" style="background-color: #e5c6a0; border: #e5c6a0; color: #000000;"><i class="bi bi-check-circle-fill"></i> Sign Up</button>
+                    <!-- line break -->
+                    <br><br/>
+                    <!-- horizontal line -->
+                    <hr>
+                    <!-- existing users prompted to login  -->
+                    <h4 id="heading">If you already have an account, <a href="{% url 'login'%}">login.</a></h4>
+            </div>
+        </div>
+    </div>
+    <!-- line break -->
+    <br><br/>
+{% endblock %}
