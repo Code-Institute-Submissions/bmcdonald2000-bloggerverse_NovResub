@@ -23,3 +23,16 @@ class Post(models.Model):
     # function to redirect user to view the post they just made
     def get_absolute_url(self):
         return reverse('details', args=[str(self.id)])
+
+
+# fields and behaviours for comment model
+class comment(models.Model):
+    post = models.ForeignKey(Post, related_name="comments",
+                             on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    body = models.TextField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    # function to return data as string in the django admin
+    def __str__(self):
+        return '%s - %s' % (self.post.title, self.name)
