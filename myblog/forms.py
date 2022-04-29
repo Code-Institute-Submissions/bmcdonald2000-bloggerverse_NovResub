@@ -3,6 +3,7 @@ from django import forms
 from .models import Post, comment, Category
 
 # options = [('law', 'law'), ('coding', 'coding')]
+
 # creates a query of names from the Category model
 options = Category.objects.all().values_list('name', 'name')
 
@@ -31,7 +32,7 @@ class PostForms(forms.ModelForm):
                                             'Enter post title'}),
             'author': forms.TextInput(attrs={'value': '', 'id': 'username',
                                              'type': 'hidden'}),
-            'category': forms.Select(choices=options,
+            'category': forms.Select(choices=categories_list,
                                      attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
             'summary': forms.Textarea(attrs={'class': 'form-control'}),
