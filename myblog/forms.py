@@ -1,6 +1,6 @@
 # django imports
 from django import forms
-from .models import Post
+from .models import Post, comment
 
 
 # creates a form for the posts using a model
@@ -47,4 +47,23 @@ class EditForm(forms.ModelForm):
             'summary': forms.Textarea(attrs={'class': 'form-control',
                                              'placeholder':
                                              'Summarise your post'}),
+        }
+
+
+# creates a comment form using a model
+class CommentForm(forms.ModelForm):
+
+    # form metadata options
+    class Meta:
+        # using comment model
+        model = comment
+
+        # fields that will be used for the form
+        fields = ('name', 'body')
+
+        # basic controls/styling for the form fields
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', }),
+            'body': forms.Textarea(attrs={'class': 'form-control',
+                                          'placeholder': 'Enter comment'}),
         }
