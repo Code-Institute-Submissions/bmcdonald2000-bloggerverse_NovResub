@@ -7,6 +7,13 @@
 <!-- Template content -->
 {% block content %}
     <br/>
+     <!-- If the post author has a profile picture it shall be displayed. The profile pictures are hyperlinked making it easy for the users to view the auhtors profile. -->
+    {% if post.author.userprofile.profile_picture %}
+        <a href="{% url 'view_profile' post.author.userprofile.id %}"><img src="{{ post.author.userprofile.profile_picture.url }}" align="right" width="100px" height="100px" class="rounded-circle"></a>
+    <!-- If the post author has not uploaded a profile picture, a default image will be used. The profile pictures are hyperlinked making it easy for the users to view the auhtors profile. -->  
+    {% else %}
+        <a href="{% url 'view_profile' post.author.userprofile.id %}"><img src="{{'/static/images/default.png'}}" align="right" width="100px" height="100px" class="rounded-circle"></a>
+    {% endif %}
     <!-- The post summary clicked on by the user will be displayed in full-->
     <!-- page header -->
     <h1>{{ post.title|title }}</h1>
@@ -16,63 +23,115 @@
         {{ post.author.last_name|title }}
         - {{ post.date }}
         <br/> 
-        <!-- Logged in user can edit and delete their own posts --> 
-        {% if user.is_authenticated %}
-            {% if user.id == Post.author.id %}
-                <a href="{% url 'edit' Post.pk %}" target="_blank">Edit</a> |
-                <a href="{% url 'delete' Post.pk %}" target="_blank">Delete</a>
-            {% endif %}
-        {% endif %}
-        <hr>
-        <!-- If an image is uploaded witht he post, this will also be displayed -->
-        {% if post.image %}
-            <img src="{{ post.image.url }}" width="300px" height="300px">
-            <br><br/>
-        {% endif %}
-        {{ post.body|safe }}
+        <!-- post category hyperlinked to display all post in that category. '|slugify' converts blank spaces between words into '-' to maintain good coding practices  -->  
+        <small><a href="{% url 'category_page' post.category|slugify %}" target="_blank">{{post.category|title}}</a> <i class="bi bi-tags-fill"></i></small>
 
-        <br><br/>
-        <!-- Home button -->
-        <a href="{% url 'home' %}"><button class="btn btn-info" style="background-color: #e5c6a0; border: #e5c6a0; color: #000000;"><i class="bi bi-arrow-left" alt="" width="80" height="24" class="d-inline-block align-text-top"></i> Back</button></a>
-        
-        <br><br/>
-        <hr>
-        <br/>
-        <form action="{% url 'like' post.pk %}" method="POST">
-            {% csrf_token %}
-            <!-- The logged in users are able to like posts, once liked they are able to dislike -->
-            {% if user.is_authenticated %}
-                {% if liked %}
-                        <button type="submit", class= "btn btn-danger btn-sm", name= "like_id", value="{{ post.id }}">Dislike</button>
-                {% else %}
-                        <button type="submit", class= "btn btn-primary btn-sm", name= "like_id", value="{{ post.id }}">Like</button> 
-                {% endif %}
-            {% else %} 
-                <!-- If a user is viewing the post but hasn't logged in they would be prompted to do so -->
-                <small> <a href="{% url 'login' %}" target="_blank">login</a> to like this post</small> 
+        {% if user.is_authenticated %}
+            <!-- If the author is viewing their own posst they will be able to edit or delete that post-->
+            {% if user.id == post.author.id %}
+                <a href="{% url 'edit' post.pk %}" target="_blank" >Edit</a> |
+                <a href="{% url 'delete' post.pk %}" target="_blank">Delete</a>
             {% endif %}
-            <!-- The number of likes are displayed below each post -->
-            - {{ num_likes }} likes
-        </form>
-        <br><br/>
-        <h2>Comments</h2>
-        <!-- The user is prompted to leave a comment if there are no comments -->
-        {% if not post.comments.all %}
-    
-            No comments yet, be the first to <a href="{% url 'add_comment' post.pk %}" target="_blank">add one</a>
-    
-        {% else %}
-        <!-- When a post has comments they will all be displayed below the post-->
-            {% for comment in post.comments.all %}
-                <br/>
-                {{ comment.body }}
-                <br/>
-                <small><strong>{{ comment.name }} - {{ comment.date }}</strong></small>
-            {% endfor %}
-            <br><br/>
-            <!-- All users will be able to add there own comments -->
-            <a href="{% url 'add_comment' post.pk %}" target="_blank" >Add a comment</a>
         {% endif %}
-        <hr>
-        <br/>
+    </small><br/>
+    <hr>
+    <!-- If an image is uploaded witht he post, this will also be displayed -->
+    {% if post.image %}
+        <img src="{{ post.image.url }}" width="300px" height="300px">
+        <br><br/>
+    {% endif %}
+    {{ post.body|safe }}
+
+    <br><br/>
+    <!-- Home button -->
+    <a href="{% url 'home' %}"><button class="btn btn-info" style="background-color: #e5c6a0; border: #e5c6a0; color: #000000;"><i class="bi bi-arrow-left" alt="" width="80" height="24" class="d-inline-block align-text-top"></i> Back</button></a>
+   
+    <br><br/>
+    <hr>
+    <br/>
+    <form action="{% url 'like' post.pk %}" method="POST">
+        {% csrf_token %}
+        <!-- The logged in users are able to like posts, once liked they are able to dislike -->
+        {% if user.is_authenticated %}
+            {% if liked %}
+                    <button type="submit", class= "btn btn-danger btn-sm", name= "like_id", value="{{ post.id }}">Dislike</button>
+            {% else %}
+                    <button type="submit", class= "btn btn-primary btn-sm", name= "like_id", value="{{ post.id }}">Like</button> 
+            {% endif %}
+        {% else %} 
+            <!-- If a user is viewing the post but hasn't logged in they would be prompted to do so -->
+            <small> <a href="{% url 'login' %}" target="_blank">login</a> to like this post</small> 
+        {% endif %}
+        <!-- The number of likes are displayed below each post -->
+        - {{ num_likes }} likes
+    </form>
+    <br><br/>
+    <h2>Comments</h2>
+    <!-- The user is prompted to leave a comment if there are no comments -->
+    {% if not post.comments.all %}
+
+        No comments yet, be the first to <a href="{% url 'add_comment' post.pk %}" target="_blank">add one</a>
+
+    {% else %}
+    <!-- When a post has comments they will all be displayed below the post-->
+        {% for comment in post.comments.all %}
+            <br/>
+            {{ comment.body }}
+            <br/>
+            <small><strong>{{ comment.name }} - {{ comment.date }}</strong></small>
+        {% endfor %}
+        <br><br/>
+        <!-- All users will be able to add there own comments -->
+        <a href="{% url 'add_comment' post.pk %}" target="_blank" >Add a comment</a>
+    {% endif %}
+    <hr>
+    <br/>
+    <!-- This bootstrap card displays the authors bio, profile picrure and social media links -->
+    <div class="card mb-3" style="max-width: 100%;">
+        <div class="row no-gutters">
+          <div class="col-md-2">
+                {% if post.author.userprofile.profile_picture %}
+                <img src="{{ post.author.userprofile.profile_picture.url }}" style="max-height: 500px" class="card-img" alt="profile picture">
+                {% else %}
+                    <img src="{{'/static/images/default.png' }}" style="max-height: 500px" class="card-img" alt="profile picture">
+                {% endif %}
+          </div>
+          <div class="col-md-10">
+            <div class="card-body">
+            <!-- The authors full name is displayed on the bio card -->
+              <h5 class="card-title">{{ post.author.first_name|title }} {{ post.author.last_name|title }}</h5>
+              <p class=" small text-muted">
+            <!-- The link to the author's bio is displayed -->
+              <a href="{% url 'view_profile' post.author.userprofile.id %}" target="_blank">View author's profile</a>
+            <!-- The user only sees links for the social media provided by the author. All links opend in a new tab -->
+                {% if post.author.userprofile.Website %}
+                    <a href="{{ post.author.userprofile.Website }}" target="_blank">Website</a>
+                {% endif %} 
+
+                {% if post.author.userprofile.Twitter %}
+                    |<a href="{{ post.author.userprofile.Twitter }}" target="_blank">Twitter</a>
+                {% endif %} 
+
+                {% if post.author.userprofile.Instagram %}
+                    |<a href="{{ post.author.userprofile.Instagram }}" target="_blank">Instagram</a>
+                {% endif %} 
+
+                {% if post.author.UserProfile.Youtube %}
+                    |<a href="{{ post.author.userprofile.Youtube }}" target="_blank">Youtube</a>
+                {% endif %}
+
+                {% if post.author.userprofile.Linkedin %}
+                    |<a href="{{ post.author.userprofile.Linkedin }}" target="_blank">Linkedin</a>
+                {% endif %} 
+
+                {% if post.author.UserProfile.Podcast %}
+                    |<a href="{{ post.author.userprofile.Podcast }}" target="_blank">Podcast</a>
+                {% endif %} 
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <br/><br/>
+
 {% endblock %}
