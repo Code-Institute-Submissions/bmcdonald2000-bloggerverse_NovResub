@@ -17,6 +17,6 @@ urlpatterns = [
          CommentView.as_view(), name='add_comment'),
     path('Add_Category/', AddCategoryView.as_view(),
          name='category'),
-    path('Add_Category/', AddCategoryView.as_view(), name='category'),
+    path('Category/<str:category>/', CategoryView, name='category_page'),
     path('Category_list/', CategoryListView, name='category_list'),
 ]
