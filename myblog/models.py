@@ -6,6 +6,29 @@ from ckeditor.fields import RichTextField
 from datetime import datetime
 
 
+# fields and behaviours for UserProfile model
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    Bio = models.TextField()
+    profile_picture = models.ImageField(null=True,
+                                        blank=True, 
+                                        upload_to="images/profile/")
+    Twitter = models.CharField(max_length=255, null=True, blank=True,)
+    Instagram = models.CharField(max_length=255, null=True, blank=True,)
+    Youtube = models.CharField(max_length=255, null=True, blank=True,)
+    Linkedin = models.CharField(max_length=255, null=True, blank=True,)
+    Website = models.CharField(max_length=255, null=True, blank=True,)
+    Podcast = models.CharField(max_length=255, null=True, blank=True,)
+
+    # function to identify the user
+    def __str__(self):
+        return str(self.user)
+
+    # function to return to home page
+    def get_absolute_url(self):
+        return reverse('home')
+
+
 # fields and behaviours for Post model
 class Post(models.Model):
     title = models.CharField(max_length=255)
@@ -30,9 +53,6 @@ class Post(models.Model):
     def num_likes(self):
         return self.like.count()
 
-    # function to redirect user to view the post they just made
-    def get_absolute_url(self):
-        return reverse('details', args=[str(self.id)])
 
 
 # fields and behaviours for comment model
