@@ -16,7 +16,7 @@ class HomeView(ListView):
 
     # using html template to display blog post on the home page
     template_name = 'home.html'
-    
+
     # post apprear in date order (recent first)
     ordering = ['-date']
 
@@ -29,6 +29,7 @@ class HomeView(ListView):
         context = super(HomeView, self).get_context_data(*args, **kwargs)
         context["category_menu"] = category_menu
         return context
+
 
 # displays add post page using django CreateView
 class AddPostView(SuccessMessageMixin, CreateView):
@@ -54,6 +55,14 @@ class postView(DetailView):
 
     # using html template to display post
     template_name = 'post_details.html'
+
+    # displays the categories used in the dropdown menu
+    def get_context_data(self, *args, **kwargs):
+        category_menu = Category.objects.all()
+        context = super(postView, self).get_context_data(*args, **kwargs)
+
+        context["category_menu"] = category_menu
+        return context
 
 
 # displays edit post page using django UpdateView
