@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from ckeditor.fields import RichTextField
-from datetime import date, datetime
+from datetime import date
 
 
 # fields and behaviours for Post model
@@ -14,8 +14,8 @@ class Post(models.Model):
     body = RichTextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     summary = models.CharField(max_length=255)
-    post_date = models.DateField(auto_now_add=True,
-                                 default=datetime.date.today)
+    date = models.DateField(auto_now_add=True,
+                            default=date.today)
 
     # function for admin page to view post title and author
     def __str__(self):
