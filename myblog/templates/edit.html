@@ -1,0 +1,35 @@
+<!-- Extends the base template -->
+{% extends 'base.html' %}
+
+<!-- Template title -->
+{% block title%} Edit Post {% endblock %}
+
+<!-- Template content -->
+{% block content %}
+<br/>
+            <!-- boostrap card -->
+            <div class="card">
+                <!-- boostrap card body -->
+                <div class="card-body">
+                    <!-- page header -->
+                    <h1 class="card-title" id="heading">Edit Your Post</h1>
+                    <!-- line break -->
+                    <br/>
+                    <!-- horizontal line -->
+                    <hr>
+                    <!-- line break -->
+                    <br/>
+                    <div class="form-group">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form.media }}
+                            {{ form.as_p }}
+                            <button class="btn btn-info" style="background-color: #e5c6a0; border: #e5c6a0; color: #000000;"><i class="bi bi-pencil-fill"></i> Edit</button>
+                    </div>
+                </div>
+            </div>
+            <!-- line break -->
+            <br/><br/><br/>
+    {% endif %}
+
+{% endblock %}
