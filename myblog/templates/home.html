@@ -41,7 +41,8 @@
                                 <!-- Logged in user can edit and delete their own posts --> 
                                 {% if user.is_authenticated %}
                                     {% if user.id == Post.author.id %}
-                                        <a href="{% url'edit'Post.pk %}" target="_blank">Edit</a>
+                                        <a href="{% url 'edit' Post.pk %}" target="_blank">Edit</a> |
+                                        <a href="{% url 'delete' Post.pk %}" target="_blank">Delete</a>
                                     {% endif %}
                                 {% endif %}
                             </small>

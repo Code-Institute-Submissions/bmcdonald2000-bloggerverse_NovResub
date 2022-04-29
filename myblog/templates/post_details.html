@@ -16,16 +16,13 @@
         {{ post.author.last_name|title }}
         - {{ post.date }}
         <br/> 
-        <!-- post category hyperlinked to display all post in that category. '|slugify' converts blank spaces between words into '-' to maintain good coding practices  -->  
-        <small><a href="{% url 'category_page' post.category|slugify %}" target="_blank">{{post.category|title}}</a> <i class="bi bi-tags-fill"></i></small>
-
-            {% if user.is_authenticated %}
-                <!-- If the author is viewing their own posst they will be able to edit or delete that post-->
-                {% if user.id == post.author.id %}
-                    <a href="{% url 'edit' post.pk %}" target="_blank" >Edit</a> |
-                {% endif %}
+        <!-- Logged in user can edit and delete their own posts --> 
+        {% if user.is_authenticated %}
+            {% if user.id == Post.author.id %}
+                <a href="{% url 'edit' Post.pk %}" target="_blank">Edit</a> |
+                <a href="{% url 'delete' Post.pk %}" target="_blank">Delete</a>
             {% endif %}
-        </small><br/>
+        {% endif %}
         <hr>
         <!-- If an image is uploaded witht he post, this will also be displayed -->
         {% if post.image %}
