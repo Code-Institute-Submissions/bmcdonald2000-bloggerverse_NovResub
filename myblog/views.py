@@ -3,8 +3,8 @@ from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic import DetailView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from .models import Post
-from .forms import PostForms, EditForm
+from .models import Post, comment
+from .forms import PostForms, EditForm, CommentForm
 
 
 # displays blog posts on the home page in a list
@@ -73,3 +73,19 @@ class DeletePostView(SuccessMessageMixin, DeleteView):
 
     # adds a message if the form is success using SuccessMessageMixin
     success_message = " Your post was deleted from the Bloggerverse "
+
+
+# displays comments page using django CreateView
+class CommentView(SuccessMessageMixin, CreateView):
+
+    # using comment model
+    model = comment
+
+    # using CommentForm
+    form_class = CommentForm
+
+    # using html template to display comments
+    template_name = 'comment.html'
+
+    # adds a message if the form is success using SuccessMessageMixin
+    success_message = " Thanks for sharing your thoughts in the Bloggerverse"
