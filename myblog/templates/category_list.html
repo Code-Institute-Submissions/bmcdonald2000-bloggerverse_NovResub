@@ -1,0 +1,34 @@
+<!-- Extends the base template -->
+{% extends 'base.html' %}
+
+<!-- Template title -->
+{% block title%} Categories List {% endblock %}
+
+<!-- Template content -->
+{% block content %}
+    <br><br/>
+    <div class="card border-secondary">
+        <!-- Line break -->
+        <br/>
+        <!-- page header -->
+        <h1 class=" card-title" id="heading">Categories</h1>
+        <hr>
+        <!-- Line break -->
+        <br/>
+            <div class="card-body">
+                <!-- A dropdown link is created for each category -->
+                {% for item in category_list %}
+                    <!-- '|title '  capitalises the first letter of the categories -->
+                    <h4 class="categories-list"><a class="dropdown-item" href="{% url 'category_page' item|slugify %}">{{ item|title }}</a></h4>
+                {% endfor %}
+                <!-- Line break -->
+                <br/>
+                <!-- horizontal line to divide the information -->
+                <hr>
+                <!-- For convinece the user can add a cateogry directly from the category list, the form is opened in a seperate tab-->
+                If your want to <a href="{% url 'category' %}" target="_blank">add a category</a> to this list, feel free !
+            </div>
+    </div>
+    <!-- Line break -->
+    <br/><br/>  
+{% endblock %}
