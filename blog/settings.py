@@ -149,6 +149,10 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+# users redirected to homepage on login and logout 
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
 # django-heroku updates variables in my local namespace based on my project layout and environment variables
 
 import django_heroku
