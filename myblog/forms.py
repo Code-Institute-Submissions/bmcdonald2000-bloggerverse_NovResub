@@ -23,3 +23,28 @@ class PostForms(forms.ModelForm):
             'body': forms.Textarea(attrs={'class': 'form-control'}),
             'summary': forms.Textarea(attrs={'class': 'form-control'}),
         }
+
+
+# creates an edit form using  a model
+class EditForm(forms.ModelForm):
+
+    # form metadata options
+    class Meta:
+        # using Post model
+        model = Post
+
+        # fields that will be used for the form
+        fields = ('title', 'body', 'summary')
+
+        # basic controls/styling for the form fields
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control',
+                                            'placeholder':
+                                            'Enter Post Title'}),
+            'body': forms.Textarea(attrs={'class': 'form-control',
+                                          'placeholder':
+                                          'Type your Post'}),
+            'summary': forms.Textarea(attrs={'class': 'form-control',
+                                             'placeholder':
+                                             'Summarise your post'}),
+        }
