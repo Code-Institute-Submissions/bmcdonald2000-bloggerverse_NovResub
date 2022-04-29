@@ -46,7 +46,7 @@ class Category(models.Model):
 
     # categories are displayed in the admin section
     def __str__(self):
-        return '%s - %s' % (self.name)
+        return self.name
 
     # returns user to the add posts page so they can upload a post
     def get_absolute_url(self):
