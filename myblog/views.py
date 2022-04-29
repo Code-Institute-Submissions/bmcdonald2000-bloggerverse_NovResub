@@ -3,7 +3,7 @@ from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic import DetailView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from .models import Post, comment
+from .models import Post, comment, Category
 from .forms import PostForms, EditForm, CommentForm
 
 
@@ -89,3 +89,22 @@ class CommentView(SuccessMessageMixin, CreateView):
 
     # adds a message if the form is success using SuccessMessageMixin
     success_message = " Thanks for sharing your thoughts in the Bloggerverse"
+
+
+# displays add category page using django CreateView
+class AddCategoryView(SuccessMessageMixin, CreateView):
+
+    # using Category model
+    model = Category
+
+    # using html template to display add category page
+    template_name = 'categories.html'
+
+    # using all the fields
+    fields = '__all__'
+
+    # redirects user to the post form if form successful
+    success_url = reverse_lazy('posts')
+
+    # adds a message if the form is successful using SuccessMessageMixin
+    success_message = " We have added your category to the Bloggerverse"
