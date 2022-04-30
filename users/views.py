@@ -1,4 +1,5 @@
 # django imports
+from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DetailView
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.views import PasswordChangeView
@@ -56,13 +57,14 @@ class ProfilePageView(DetailView):
 
     # function to determine the user
     def get_context_data(self, *args, **kwargs):
-        
-		context = super(ProfilePageView, self).get_context_data(*args, **kwargs)
-		
-		user = get_object_or_404(UserProfile, id=self.kwargs['pk'])
 
-		context["user"] = user
-	    return context
+        context = super(ProfilePageView, self).get_context_data(*args,
+                                                                **kwargs)
+
+        user = get_object_or_404(UserProfile, id=self.kwargs['pk'])
+
+        context["user"] = user
+        return context
 
 
 # displays edit profile page using django UpdateView
