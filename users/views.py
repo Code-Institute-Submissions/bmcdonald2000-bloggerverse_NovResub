@@ -1,5 +1,6 @@
 # django imports
 from django.views.generic import CreateView, DetailView
+from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from .forms import RegForm, ProfilePageForm
 from .myblog.models import UserProfile
@@ -50,3 +51,22 @@ class ProfilePageView(DetailView):
 
     # displayed on html template page
     template_name = 'registration/view_profile.html'
+
+
+# displays edit profile page using django UpdateView
+class EditProfileView(SuccessMessageMixin, UpdateView):
+
+    # using UserProfile model
+    model = UserProfile
+
+    # displayed on html template page
+    template_name = 'registration/profile.html'
+
+    # using ProfilePageForm
+    form_class = ProfilePageForm
+
+    # if form is completly successfully then user is returned to the home page
+    success_url = reverse_lazy('home')
+
+    # adds a message if the form is success using SuccessMessageMixin
+    success_message = " Everything is up to date in the Bloggerverse !"
