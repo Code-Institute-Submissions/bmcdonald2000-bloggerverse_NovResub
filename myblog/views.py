@@ -1,5 +1,5 @@
 # django imports
-from users.models import Post, comment, Category
+from myblog.models import Post, comment, Category
 from users.forms import PostForms, EditForm, CommentForm
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView
