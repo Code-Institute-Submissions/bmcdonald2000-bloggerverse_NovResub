@@ -1,12 +1,12 @@
 # django imports
+from models import Post, comment, Category
+from forms import PostForms, EditForm, CommentForm
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic import DetailView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
-from .models import Post, comment, Category
-from .forms import PostForms, EditForm, CommentForm
 
 
 # displays blog posts on the home page in a list
@@ -61,7 +61,7 @@ class postView(DetailView):
     def get_context_data(self, *args, **kwargs):
         category_menu = Category.objects.all()
         context = super(postView, self).get_context_data(*args, **kwargs)
-        
+
         # displays the number of likes a post has
         x = get_object_or_404(Post, id=self.kwargs['pk'])
         num_likes = x.num_likes()
@@ -168,10 +168,10 @@ def LikePostView(request, pk):
 
     # like button changes to dislike after it has been liked
     if liked_post.like.filter(id=request.user.id).exists():
-            liked_post.like.remove(request.user)
-            liked = False
+        liked_post.like.remove(request.user)
+        liked = False
     else:
-            liked_post.like.add(request.user)
-            liked = True
+        liked_post.like.add(request.user)
+        liked = True
 
     return HttpResponseRedirect(reverse('details', args=[str(pk)]))
