@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import UserRegView, create_profile_view, ProfilePageView
-from .views import EditProfileSettingsView
+from .views import EditProfileSettingsView, PasswordView
 from .views import EditProfileView
 
 # URL patters for each page
@@ -14,4 +14,5 @@ urlpatterns = [
          name='profile'),
     path('Edit_settings/', EditProfileSettingsView.as_view(),
          name='profile_settings'),
+    path('password/', PasswordView.as_view(), name='password'),
 ]
