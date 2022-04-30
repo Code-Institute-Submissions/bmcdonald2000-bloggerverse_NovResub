@@ -1,4 +1,5 @@
 # django imports
+from myblog.models import UserProfile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import forms
@@ -32,3 +33,39 @@ class RegForm(UserCreationForm):
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
+
+
+# creates profile form using django models
+class ProfilePageForm(forms.ModelForm):
+    class Meta:
+
+        model = UserProfile
+
+        fields = ('Bio', 'profile_picture',
+                  'Website', 'Youtube', 'Twitter',
+                  'Instagram', 'Podcast', 'Linkedin')
+
+        # adds basic style/controls to widget instances
+        widgets = {
+            'Bio': forms.Textarea(attrs={'class': 'form-control'}),
+            'Website': forms.TextInput(attrs={'class':
+                                              'form-control', 'placeholder':
+                                                              "Website URL"}),
+            'Youtube': forms.TextInput(attrs={'class':
+                                              'form-control', 'placeholder':
+                                                              "Youtube URL"}),
+            'Podcast': forms.TextInput(attrs={'class':
+                                              'form-control', 'placeholder':
+                                                              "Podcast URL"}),
+            'Twitter': forms.TextInput(attrs={'class':
+                                              'form-control', 'placeholder':
+                                                              "Twitter URL"}),
+            'Instagram': forms.TextInput(attrs={'class':
+                                                'form-control',
+                                                'placeholder':
+                                                "Instagram URL"}),
+            'Linkedin': forms.TextInput(attrs={'class':
+                                               'form-control',
+                                               'placeholder':
+                                               "Linkedin URL"}),
+            }
