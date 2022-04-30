@@ -3,6 +3,8 @@ from .views import HomeView, PostView, AddPostView
 from .views import EditPostView, DeletePostView
 from .views import CommentView, AddCategoryView
 from .views import CategoryListView, CategoryView
+from .views import LikePostView
+
 
 
 # Sets the url pattern for each page.
@@ -19,4 +21,5 @@ urlpatterns = [
          name='category'),
     path('Category/<str:category>/', CategoryView, name='category_page'),
     path('Category_list/', CategoryListView, name='category_list'),
+    path('Like/<int:pk>', LikePostView, name='like'),
 ]
