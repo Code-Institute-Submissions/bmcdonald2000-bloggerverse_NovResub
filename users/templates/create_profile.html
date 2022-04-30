@@ -1,0 +1,37 @@
+<!-- Extends the base template -->
+{% extends 'base.html' %}
+
+<!-- Template title -->
+{% block title%} Create Profile {% endblock %}
+
+<!-- Template content-->
+{% block content %}
+     <!-- Page only accesible to users that are logged in -->
+    {% if user.is_authenticated %}
+        <!-- boostrap card -->
+        <div class="card">
+            <!-- boostrap card body -->
+            <div class="card-body">
+                <!-- personalised page header -->
+                <h1 class="card-title" id="heading"> Create {{ user.username }}'s profile </h1>
+                <!-- line break -->
+                <br/>
+                <!-- horizontal line -->
+                <hr>
+                <!-- Profile form  -->
+                <div class="form-group">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button class="btn btn-info" style="background-color: #e5c6a0; border: #e5c6a0; color: #000000;"><i class="bi bi-check-circle-fill"></i> Create Profile </button>
+                </div>
+            </div>
+        </div>
+        <!-- line break -->
+        <br/><br/><br/>
+    {% else %} 
+        <!-- users that are not logged in are prompted to login  -->
+        <small> <a href="{% url 'login' %}">login</a> to create your profile</small> 
+    {% endif %}
+
+{% endblock %}
