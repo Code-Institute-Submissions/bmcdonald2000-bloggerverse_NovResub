@@ -70,3 +70,22 @@ class EditProfileView(SuccessMessageMixin, UpdateView):
 
     # adds a message if the form is success using SuccessMessageMixin
     success_message = " Everything is up to date in the Bloggerverse !"
+
+
+# displays edit profile setting page using django UpdateView
+class EditProfileSettingsView(SuccessMessageMixin, UpdateView):
+
+    # using ProfileSettingsForm
+    form_class = ProfileSettingsForm
+
+    # displayed on html template page
+    template_name = 'registration/profile_settings.html'
+
+    # if form is completly successfully then user is returned to the home page
+    success_url = reverse_lazy('home')
+
+    # adds a message if the form is success using SuccessMessageMixin
+    success_message = " your changes have been saved "
+
+    def get_object(self):
+        return self.request.user
