@@ -49,7 +49,7 @@ class AddPostView(SuccessMessageMixin, CreateView):
 
 
 # displays view post page using django DetailView
-class postView(DetailView):
+class PostView(DetailView):
 
     # using Post model
     model = Post
@@ -60,7 +60,7 @@ class postView(DetailView):
     # displays the categories used in the dropdown menu
     def get_context_data(self, *args, **kwargs):
         category_menu = Category.objects.all()
-        context = super(postView, self).get_context_data(*args, **kwargs)
+        context = super(PostView, self).get_context_data(*args, **kwargs)
 
         # displays the number of likes a post has
         x = get_object_or_404(Post, id=self.kwargs['pk'])
