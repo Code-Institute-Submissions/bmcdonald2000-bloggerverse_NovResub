@@ -47,7 +47,7 @@ class Post(models.Model):
 
     # function to redirect user to view the post they just made
     def get_absolute_url(self):
-        return reverse('details', args=[str(self.id)])
+        return reverse('details')
     
     # function for number of likes
     def num_likes(self):
