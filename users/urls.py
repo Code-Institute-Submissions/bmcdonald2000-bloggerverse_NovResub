@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import UserRegView, create_profile_view, ProfilePageView, EditProfileSettingsView
+from .views import UserRegView, create_profile_view, ProfilePageView
+from .views import EditProfileSettingsView
 from .views import EditProfileView
 
 # URL patters for each page
