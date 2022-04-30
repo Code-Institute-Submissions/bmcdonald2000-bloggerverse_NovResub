@@ -40,7 +40,7 @@
                   <!-- A dropdown link is created for each category -->
                   {% for item in category_menu %}
                     <!-- '|title '  capitalises the first letter of the categories -->
-                    <a class="dropdown-item" href="url 'category_page' item|slugify">{{item|title}}</a>
+                    <a class="dropdown-item" href="{% url 'category_page' item|slugify %}">{{item|title}}</a>
                   {% endfor %}
                 </div>
               </div>
