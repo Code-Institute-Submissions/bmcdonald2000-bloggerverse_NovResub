@@ -58,9 +58,6 @@ footer{
     /* always full width of the page */
     width: 100%;
     
-    /* always at the bottom of the page */
-    bottom: 0px;
-    position: fixed;
     
     /* all fotter text is displyed in the center */
     text-align: center;
