@@ -1,7 +1,7 @@
 # django imports
 from django.views.generic import CreateView, DetailView
 from django.urls import reverse_lazy
-from forms import RegForm, ProfilePageForm
+from .forms import RegForm, ProfilePageForm
 from myblog.models import UserProfile
 from django.contrib.messages.views import SuccessMessageMixin
 
