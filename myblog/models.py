@@ -49,9 +49,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title + ' | ' + str(self.author)
 
-    # function to redirect user to view the post they just made
+    # function to redirect user to view the post they made
     def get_absolute_url(self):
-        return reverse('details')
+        return reverse('details', args=[str(self.id)])
 
 
 # fields and behaviours for comment model
