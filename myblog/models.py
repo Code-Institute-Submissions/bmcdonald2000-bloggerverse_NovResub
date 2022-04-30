@@ -11,7 +11,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     Bio = models.TextField()
     profile_picture = models.ImageField(null=True,
-                                        blank=True, 
+                                        blank=True,
                                         upload_to="images/profile/")
     Twitter = models.CharField(max_length=255, null=True, blank=True,)
     Instagram = models.CharField(max_length=255, null=True, blank=True,)
@@ -41,6 +41,10 @@ class Post(models.Model):
     date = models.DateField(default=datetime.now)
     like = models.ManyToManyField(User, related_name='blog_post')
 
+    # function for number of likes
+    def num_likes(self):
+        return self.like.count()
+
     # function for admin page to view post title and author
     def __str__(self):
         return self.title + ' | ' + str(self.author)
@@ -48,11 +52,6 @@ class Post(models.Model):
     # function to redirect user to view the post they just made
     def get_absolute_url(self):
         return reverse('details')
-    
-    # function for number of likes
-    def num_likes(self):
-        return self.like.count()
-
 
 
 # fields and behaviours for comment model
