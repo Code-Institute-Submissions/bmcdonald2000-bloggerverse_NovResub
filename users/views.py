@@ -1,8 +1,8 @@
 # django imports
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from django.urls import reverse_lazy
 from forms import RegForm, ProfilePageForm
-from project.myblog.models import UserProfile
+from myblog.models import UserProfile
 from django.contrib.messages.views import SuccessMessageMixin
 
 
@@ -40,3 +40,13 @@ class create_profile_view(SuccessMessageMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+
+# displays view profile page using django DetailView
+class ProfilePageView(DetailView):
+
+    # using UserProfile model
+    model = UserProfile
+
+    # displayed on html template page
+    template_name = 'registration/view_profile.html'
