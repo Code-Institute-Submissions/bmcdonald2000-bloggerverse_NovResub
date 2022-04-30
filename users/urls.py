@@ -1,5 +1,6 @@
 from django.urls import path
-from views import UserRegView, create_profile_view, ProfilePageView
+from .views import UserRegView, create_profile_view, ProfilePageView
+from .views import EditProfileView
 
 # URL patters for each page
 urlpatterns = [
@@ -8,4 +9,6 @@ urlpatterns = [
          name='create_profile'),
     path('<int:pk>/Profile/', ProfilePageView.as_view(),
          name='view_profile'),
+    path('<int:pk>/Edit_profile/',EditProfileView.as_view(), 
+         name='profile'),
 ]
