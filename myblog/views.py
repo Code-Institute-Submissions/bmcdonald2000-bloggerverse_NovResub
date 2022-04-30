@@ -155,8 +155,8 @@ def CategoryListView(request):
 def CategoryView(request, category):
     post_category = Post.objects.filter(category=category.replace('-', ' '))
     return render(request, 'category_pages.html',
-                  {'category': category.replace('-', ' ').title(),
-                   'post_category': post_category})
+                  {'category':category.replace('-', ' ').title(),
+                   'post_category':post_category})
 
 
 # function to show post likes
