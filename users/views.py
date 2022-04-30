@@ -38,7 +38,7 @@ class create_profile_view(SuccessMessageMixin, CreateView):
     template_name = 'registration/create_profile.html'
 
     # adds a message if the form is success using SuccessMessageMixin
-    success_message = " Now you're 100% ready to enter the Bloggerverse"
+    success_message = " Now you're ready to enter the Bloggerverse"
 
     # The user id is used to save the form under the user
     def form_valid(self, form):
