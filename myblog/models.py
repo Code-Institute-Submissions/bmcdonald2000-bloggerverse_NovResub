@@ -49,9 +49,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title + ' | ' + str(self.author)
 
-    # function to redirect user to view the post they made
+    # function to redirect user to the home page
     def get_absolute_url(self):
-        return reverse('details', args=[str(self.id)])
+        return reverse('home')
 
 
 # fields and behaviours for comment model
