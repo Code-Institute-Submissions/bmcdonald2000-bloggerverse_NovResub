@@ -27,12 +27,57 @@
             <i class="bi bi-house-door-fill" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
             Home
           </a>
+          <!-- If their are categories, catgeories are displayed in a droppdown.-->
+          {% if category_menu %}
+              <div class="nav-item dropdown">
+                <a class="navbar-brand dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="bi bi-folder" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
+                Categories
+                </a>
+                <!-- Dropdown elements display all of the categories  -->
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <!-- A dropdown link is created for each category -->
+                  {% for item in category_menu %}
+                    <!-- '|title '  capitalises the first letter of the categories -->
+                    <a class="dropdown-item" href="#">{{item|title}}</a>
+                  {% endfor %}
+                </div>
+              </div>
+          {% else %}
+              <!-- For pages where a categories dropdown is not available, the categories page link will be visible -->
+              <div class="nav-item">
+                <a class="navbar-brand" href="{% url 'category_list' %}"> <i class="bi bi-folder" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i> Categories</a>
+              </div>
+          {% endif%}
+
           <!-- The following navabr elements are only dispalyed for authenticated users  -->
           {% if user.is_authenticated %}
             <a class="navbar-brand" href="{% url 'posts' %}">
               <i class="bi bi-chat-left-text" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
               Add Post
             </a>
+            <a class="navbar-brand" href="{% url 'category' %}">
+              <i class="bi bi-folder-plus" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
+              Add Category
+            </a>
+            <div class="nav-item dropdown">
+              <a class="navbar-brand dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-person-circle" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
+                <!-- '|title '  capitalises the first letter of the username -->
+              {{ user.username|title }}'s Profile
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'profile_settings' %}">Edit {{ user.username|title }}'s Settings</a>
+                <!-- Only users who have set up there profile will be able to view and edit their profile -->
+                {% if user.userprofile.id%}
+                <a class="dropdown-item" href="{% url 'view_profile' user.userprofile.id %}">View {{ user.username|title }}'s Page</a>
+                <a class="dropdown-item" href="{% url 'profile' user.userprofile.id %}">Edit {{ user.username|title }}'s Page</a>
+                {% else %}
+                <!-- For users who are logged in but have not set up their profile, they will have a chance to create one-->
+                <a class="dropdown-item" href="{% url 'create_profile' %}">Create {{ user.username|title }}'s Profile </a>
+                {% endif %}
+              </div>
+            </div>
             <!-- For all users who are logged in they will see the logout button -->
             <a class="navbar-brand" href="{% url 'logout' %}">
               <i class="bi bi-box-arrow-left" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
@@ -47,6 +92,7 @@
             <a class="navbar-brand" href="{% url 'login' %}">
               <i class="bi bi-box-arrow-in-right" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
               Login
+            </a>
           {% endif %}
         </div>
       </nav>
