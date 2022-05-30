@@ -39,7 +39,7 @@
                         <!-- creates a divider  -->
                         <hr>
                         <!-- displays post authors name, date of post and number of likes -->
-                        <p class="card-text">by {{Post.author.first_name}} {{Post.author.last_name}} - {{ Post.date }} - {{ num_likes }} likes </p>
+                        <p class="card-text">by {{Post.author.first_name}} {{Post.author.last_name}} - {{Post.date}} - {{num_likes}} likes </p>
                         <small>
                             <!-- Logged in user can edit and delete their own posts --> 
                             {% if user.is_authenticated %}
