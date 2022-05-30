@@ -47,6 +47,9 @@ class AddPostView(SuccessMessageMixin, CreateView):
     # adds a message if the form is success using SuccessMessageMixin
     success_message = " Thank you for adding your post to the Bloggerverse"
 
+    # if post is added user is returned to homepage
+    success_url = reverse_lazy('home')
+
 
 # displays view post page using django DetailView
 class PostView(DetailView):
@@ -102,7 +105,7 @@ class DeletePostView(SuccessMessageMixin, DeleteView):
     # using html template to display delete post page
     template_name = 'delete.html'
 
-    # if post is deleted user is returned the homepage
+    # if post is deleted user is returned to homepage
     success_url = reverse_lazy('home')
 
     # adds a message if the form is success using SuccessMessageMixin
