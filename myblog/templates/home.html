@@ -8,8 +8,13 @@
 {% block content %}
     <!-- line break -->
     <br/>
-    <!-- page header -->
-    <h1 id="heading"> Welcome to the Bloggerverse </h1>
+    <!-- page header is personalised if the user is authenticated -->
+    {% if user.is_authenticated %}
+    <!-- '|title ' shows all usernames with first letter capitalised-->
+        <h1 id="heading"> Welcome to the Bloggerverse, {{user.username|title}}</h1>
+    {% else %}
+        <h1 id="heading"> Welcome to the Bloggerverse</h1>
+    {% endif %}
     <!-- line break -->
     <br/>
     <!-- All posts are displayed on bootstrap cards --> 
@@ -38,17 +43,23 @@
 
                         <!-- creates a divider  -->
                         <hr>
-                        <!-- displays post authors name, date of post and number of likes -->
-                        <p class="card-text">by {{Post.author.first_name}} {{Post.author.last_name}} - {{Post.date}} - {{num_likes}} likes </p>
-                        <small>
-                            <!-- Logged in user can edit and delete their own posts --> 
-                            {% if user.is_authenticated %}
-                                {% if user.id == Post.author.id %}
-                                    <a href="{% url 'edit' Post.pk %}" target="_blank">Edit</a> |
-                                    <a href="{% url 'delete' Post.pk %}" target="_blank">Delete</a>
+                        <!-- if number of Likes = 1 the it shows as 'Like' -->
+                        {% if Post.num_likes == 1 %}
+                            <!-- displays post authors name, date of post and number of Likes -->
+                            <p class="card-text">By {{Post.author.first_name}} {{Post.author.last_name}} - {{Post.date}} - {{ Post.num_likes }} Like</p>
+                            {% else %}
+                            <!-- when Likes > 1 'Likes' is used -->
+                            <p class="card-text">By {{ Post.author.username|title }}  - {{Post.date}} - {{ Post.num_likes }} Likes</p>
+                        {% endif %}
+                            <small>
+                                <!-- Logged in user can edit and delete their own posts --> 
+                                {% if user.is_authenticated %}
+                                    {% if user.id == Post.author.id %}
+                                        <a href="{% url 'edit' Post.pk %}" target="_blank">Edit</a> |
+                                        <a href="{% url 'delete' Post.pk %}" target="_blank">Delete</a>
+                                    {% endif %}
                                 {% endif %}
-                            {% endif %}
-                        </small>
+                            </small>
                     </div>
             </div>
         </div>
