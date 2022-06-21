@@ -33,6 +33,7 @@
               <p class=" small text-muted">
             <!-- The user only sees links for the social media provided by the author. All links opend in a new tab -->
                 {% if userprofile.Website %}
+                    <a href="{{ userprofile.Website }}" target="_blank">Website</a>|
                 {% endif %} 
 
                 {% if userprofile.Twitter %} 
