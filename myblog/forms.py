@@ -1,6 +1,6 @@
 # django imports
-from django import forms
 from .models import Post, comment, Category
+from django import forms
 
 # options = [('law', 'law'), ('coding', 'coding')]
 
@@ -75,9 +75,13 @@ class CommentForm(forms.ModelForm):
         # fields that will be used for the form
         fields = ('name', 'body')
 
+        # post apprear in date order (recent first)
+        ordering = ['-date']
+
         # basic controls/styling for the form fields
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'form-control', }),
+            'name': forms.TextInput(attrs={'value': '', 'id': 'username',
+                                           'type': 'hidden'}),
             'body': forms.Textarea(attrs={'class': 'form-control',
                                           'placeholder': 'Enter comment'}),
         }
