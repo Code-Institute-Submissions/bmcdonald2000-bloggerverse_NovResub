@@ -7,65 +7,69 @@
 <!-- Template content -->
 {% block content %}
     <br/>
-    <!-- If the post category exists the relvant data will be displayed --> 
-    {% if  post_category %}
-        <!-- page header -->
-        <h1 id="heading">{{category}}</h1>
-        <br/>
+    <!-- page header -->
+    <h1 id="heading">{{category}}</h1>
+    <!-- If the post category exists -->
+    {% if post_category %}
         <!-- Only posts in the category chosen by the user will be displayed. -->
         {% for post in post_category %}
-        <div class="card">
-            <div class="card border-secondary">
-                <!-- If the blog post has an image that image is displayed --> 
-                {% if post.image %}
-                    <img class="card-img-top" src="{{ post.image.url }}" style="max-height: 500px" alt=" blog image ">
-                <!-- else the default image is used --> 
-                {% else %}
-                    <img class="card-img-top" src="{{'/static/images/post.jpg'}}" style="max-height: 500px" alt=" blog image">
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <!-- makes the blog title a link by using django url --> 
-                        <a href="{% url 'details' post.pk %}" target="_blank">{{post.title}}</a> 
-                
-                    </h5>
-                    <!-- post summary is displayed --> 
-                    <p2>{{post.summary}}</p>
+            <div class="card">
+                <div class="card border-secondary">
+                    <!-- If the blog post has an image that image is displayed --> 
+                    {% if post.image %}
+                        <img class="card-img-top" src="{{ post.image.url }}" style="max-height: 500px" alt=" blog image ">
+                    <!-- else the default image is used --> 
+                    {% else %}
+                        <img class="card-img-top" src="{{'/static/images/post.jpg'}}" style="max-height: 500px" alt=" blog image">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <!-- makes the blog title a link by using django url --> 
+                            <a href="{% url 'details' post.pk %}" target="_blank">{{post.title}}</a> 
+                    
+                        </h5>
+                        <!-- post summary is displayed --> 
+                        <p2>{{post.summary}}</p>
 
-                    <!-- post category still visible but no longer hyperlinked -->  
-                    <small>{{post.category|title}} <i class="bi bi-tags-fill"></i></small>
+                        <!-- post category still visible but no longer hyperlinked -->  
+                        <small>{{post.category|title}} <i class="bi bi-tags-fill"></i></small>
 
-                    <!-- creates a divider  -->
-                    <hr>
-                    <!-- displays post authors name and date of post -->
-                    <p class="card-text">by {{post.author.first_name}} {{post.author.last_name}} - {{ post.date }} </p>
-                    <small>
-                        <!-- Logged in user can edit and delete their own posts --> 
-                        {% if user.is_authenticated %}
-                            {% if user.id == post.author.id %}
-                                <a href="{% url 'edit' post.pk %}" target="_blank">Edit</a> |
-                                <a href="{% url 'delete' post.pk %}" target="_blank">Delete</a>
+                        <!-- creates a divider  -->
+                        <hr>
+                        <!-- displays post authors name and date of post -->
+                        <p class="card-text">by {{post.author.first_name}} {{post.author.last_name}} - {{ post.date }} </p>
+                        <small>
+                            <!-- Logged in user can edit and delete their own posts --> 
+                            {% if user.is_authenticated %}
+                                {% if user.id == post.author.id %}
+                                    <a href="{% url 'edit' post.pk %}" target="_blank">Edit</a> |
+                                    <a href="{% url 'delete' post.pk %}" target="_blank">Delete</a>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
-                    </small>
+                        </small>
+                    </div>
                 </div>
             </div>
-        </div>
-        <br/>
+            <br/>
         {% endfor %}
     {% else %}
-        <br/><br/><br/><br/>
-        <!-- prevents user from access a category page that doesnt exist --> 
-        <h2> Sorry this page does not exist... <i class="bi bi-emoji-frown-fill"></i> </h2>
-        
-        <!-- Line break -->
-        <br/><br/><br><br/><br/>
+            <br/><br/><br/><br/>
+            <!-- prevents user from access a category page that doesnt exist --> 
+            <h2> Sorry there are no post in this category ... <i class="bi bi-emoji-frown-fill"></i> </h2>
+            
+            <!-- Line break -->
+            <br/><br/><br>
+            
+            <!-- User is prompted to use the navbar to find what they are looking for-->
+            <h2 > Why dont you <a href="{% url 'posts' %}" target="_blank"> add</a> a post for this catgeory</h3>
 
-        <!-- User is prompted to use the navbar to find what they are looking for-->
-        <h3 > You are a long way from the Blogerverse. Use the Navbar to take yourself back </h3>
-        
-        <!-- Line break -->
-        <br/><br/><br/><br/><br/><br/><br/><br/>
+            <!-- Line break -->
+            <br/><br/>
+
+            <!-- User is prompted to use the navbar to find what they are looking for-->
+            <p2> You are a long way from the Blogerverse. Use the Navbar to take yourself back </p2>
+            
+            <!-- Line break -->
+            <br/><br/><br/><br/><br/><br/><br/><br/>
     {% endif %}
-
 {% endblock %}
