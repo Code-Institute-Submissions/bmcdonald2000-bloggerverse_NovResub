@@ -30,8 +30,36 @@
                     </div>
                 </div>
             </div>
+        {% else %}
+            <!-- The user id is displayed, to make it clear which account they are using for users with multiple accounts -->
+            <h2 id="heading"> You are logged in as {{ user.username|title}}</h2> 
+             <!-- div makes it easier to style icon -->
+            <div class="stop">
+                <!-- boostrap stop icon -->
+                <i class="bi bi-slash-circle-fill"></i>
+            </div>
+            <!-- line break -->
+            <br><br><br>
+            <!-- User is told why they cant access the edit page -->
+            <p id="heading"> Only the author can edit this post, if you are the author please <a href="{% url 'login' %}">login</a> and try again</p>
         {% endif %}
             <!-- line break -->
             <br/><br/><br/>
+    {% else %}
+        <br><br>
+        <!-- User is told why they cant access the edit page -->
+        <h2 id="heading"> You must <a href="{% url 'login' %}">login</a> to edit your posts</h2>
+
+         <!-- div makes it easier to style icon -->
+         <div class="stop">
+            <!-- boostrap stop icon -->
+            <i class="bi bi-slash-circle-fill"></i>
+        </div>
+        <br><br>
+        <!-- Sign up link-->
+        <p id="heading"> <strong>If you don't have an account <a href="{% url 'sign_up' %}">sign up</a></strong></p>
+        <!-- line break -->
+        <br><br>
+            
     {% endif %}
 {% endblock %}
