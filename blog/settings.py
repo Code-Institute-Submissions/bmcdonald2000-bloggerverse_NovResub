@@ -10,29 +10,29 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+# Imports used 
 from pathlib import Path
 import os
+import dj_database_url
 import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+import cloudinary_storage
+from decouple import config
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+if os.path.isfile('env.py'):
+    import env
 
+development = os.environ.get('DEVELOPMENT', False)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+# SECRET_KEY configured using heroku
+SECRET_KEY = config('SECRET_KEY')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=+7dm-!9#=wjf617up5)q#q8+@f@p-c+x)5c5bd$yy=6^i6a3q'
-# SECRET_KEY is configured in heroku
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Handled by a 3rd party package
 ALLOWED_HOSTS = []
 
-
-# Application definition
+# Application definitions
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
     'myblog',
     'users',
@@ -77,9 +78,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blog.wsgi.application'
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# Default database, postgres is configured using HEROKU
 
 DATABASES = {
     'default': {
@@ -88,22 +90,35 @@ DATABASES = {
     }
 }
 
+# CLOUDINARY details are hidden using env
+CLOUDINARY_STORAGE = {
+
+    'CLOUD_NAME': os.environ.get('CLOUD_NAME'),
+    'API_KEY': os.environ.get('API_KEY'),
+    'API_SECRET': os.environ.get('API_SECRET'),
+    'SECURE': True,
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -123,25 +138,19 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-MEDIA_URL = 'media/'
 STATIC_URL = 'static/'
-
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -154,11 +163,11 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-# users redirected to homepage on login and logout 
+# user is redirected to homepage on login and logout
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
-# django-heroku updates variables in my local namespace based on my project layout and environment variables
+# django-heroku updates variables in my local namespace
 
 import django_heroku
 django_heroku.settings(locals())
