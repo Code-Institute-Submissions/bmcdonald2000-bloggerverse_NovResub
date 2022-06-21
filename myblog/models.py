@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from ckeditor.fields import RichTextField
+from cloudinary.models import CloudinaryField
 from datetime import datetime
 
 
@@ -33,7 +34,7 @@ class UserProfile(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     # RichTextField gives user all the tool style their post
-    image = models.ImageField(null=True, blank=True, upload_to="images/")
+    image = CloudinaryField('image')
     body = RichTextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=70, default='law')
@@ -65,6 +66,11 @@ class comment(models.Model):
     # function to return data as string in the django admin
     def __str__(self):
         return '%s - %s' % (self.post.title, self.name)
+
+
+    # redirects user to the post form if form successful
+    def get_absolute_url(self):
+        return reverse('details', args=[str(self.post.pk)])
 
 
 # fields and behaviours for Category model
