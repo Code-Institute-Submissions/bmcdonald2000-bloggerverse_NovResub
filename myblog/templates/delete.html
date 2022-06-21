@@ -10,7 +10,8 @@
     <br/>
     {% if user.is_authenticated %}
         {% if user.id == post.author.id %}
-            <br><br/>
+            <!-- line break -->
+            <br><br><br><br>
             <!-- delete form is displayed as a card -->
             <div class="card">
 
@@ -39,6 +40,7 @@
                     </div>
                 </div>  
             </div>
+            <br><br><br>
         {% else %}
             <!-- The user id is displayed, to make it clear which account they are using for users with multiple accounts -->
             <h2 id="heading"> You are logged in as {{ user.username|title}}</h2> 
@@ -47,7 +49,7 @@
                 <!-- boostrap stop icon -->
                 <i class="bi bi-slash-circle-fill"></i>
             </div>
-
+            <br><br><br><br>
             <p id="heading"> Only the author can delete this post, if you are the author please <a href="{% url 'login' %}">login</a> and try again</p>
         {% endif %}
     {% else %}
