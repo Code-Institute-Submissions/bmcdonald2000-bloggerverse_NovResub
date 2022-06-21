@@ -6,7 +6,6 @@ from .views import CategoryListView, CategoryView
 from .views import LikePostView
 
 
-
 # Sets the url pattern for each page.
 urlpatterns = [
     path('',  HomeView.as_view(), name="home"),
