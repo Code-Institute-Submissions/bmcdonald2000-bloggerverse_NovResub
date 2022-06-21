@@ -11,9 +11,7 @@ from datetime import datetime
 class UserProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     Bio = models.TextField()
-    profile_picture = models.ImageField(null=True,
-                                        blank=True,
-                                        upload_to="images/profile/")
+    profile_picture = CloudinaryField('image', blank=True, null=True,)
     Twitter = models.CharField(max_length=255, null=True, blank=True,)
     Instagram = models.CharField(max_length=255, null=True, blank=True,)
     Youtube = models.CharField(max_length=255, null=True, blank=True,)
@@ -34,7 +32,7 @@ class UserProfile(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     # RichTextField gives user all the tool style their post
-    image = CloudinaryField('image', null=True,)
+    image = CloudinaryField('image', blank=True, null=True,)
     body = RichTextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=70, default='law')
