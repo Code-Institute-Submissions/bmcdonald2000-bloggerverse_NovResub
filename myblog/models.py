@@ -34,7 +34,7 @@ class UserProfile(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     # RichTextField gives user all the tool style their post
-    image = CloudinaryField('image')
+    image = CloudinaryField('image', null=True,)
     body = RichTextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.CharField(max_length=70, default='law')
