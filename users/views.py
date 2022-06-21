@@ -3,11 +3,12 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, DetailView
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
+from myblog.models import UserProfile
 from .forms import RegForm, ProfilePageForm
 from .forms import ProfileSettingsForm, ChangePasswordForm
-from myblog.models import UserProfile
-from django.contrib.messages.views import SuccessMessageMixin
 
 
 # displays user regitstration page using django CreateView
@@ -22,7 +23,16 @@ class UserRegView(SuccessMessageMixin, CreateView):
     success_message = " Welcome to the Bloggerverse !"
 
     # if form is completly successfully then user is returned to the login page
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('create_profile')
+
+    def form_valid(self, form):
+        to_return = super().form_valid(form)
+        user = authenticate(
+            username=form.cleaned_data["username"],
+            password=form.cleaned_data["password1"],
+        )
+        login(self.request, user)
+        return to_return
 
 
 # displays create profile page using django CreateView
@@ -117,5 +127,5 @@ class PasswordView(SuccessMessageMixin, PasswordChangeView):
     # adds a message if the form is success using SuccessMessageMixin
     success_message = "Your password has been changed !"
 
-    # if form is completly successfully then user is returned to the home page
+    # if form is completed successfully then user is returned to the home page
     success_url = reverse_lazy('home')
