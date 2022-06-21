@@ -15,12 +15,12 @@
         <a href="{% url 'view_profile' post.author.userprofile.id %}"><img src="{{'/static/images/default.png'}}" align="right" width="100px" height="100px" class="rounded-circle"></a>
     {% endif %}
     <!-- The post summary clicked on by the user will be displayed in full-->
+
     <!-- page header -->
     <h1>{{ post.title|title }}</h1>
     <!-- author details and date appears in small font -->
     <small>By:
-        {{ post.author.first_name|title }} 
-        {{ post.author.last_name|title }}
+        {{ post.author.username|title }} 
         - {{ post.date }}
         <br/> 
         <!-- post category hyperlinked to display all post in that category. '|slugify' converts blank spaces between words into '-' to maintain good coding practices  -->  
@@ -62,8 +62,13 @@
             <!-- If a user is viewing the post but hasn't logged in they would be prompted to do so -->
             <small> <a href="{% url 'login' %}" target="_blank">login</a> to like this post</small> 
         {% endif %}
-        <!-- The number of likes are displayed below each post -->
-        - {{ num_likes }} likes
+        <!-- if number of likes = 1 the it shows as 'Like' -->
+        {% if post.num_likes == 1 %}
+            - {{ post.num_likes }} Like</p>
+        {% else %}
+        <!-- when > 1 'Likes' is used -->
+            - {{ post.num_likes }} Likes
+        {% endif %}
     </form>
     <br><br/>
     <h2>Comments</h2>
@@ -75,11 +80,22 @@
     {% else %}
     <!-- When a post has comments they will all be displayed below the post-->
         {% for comment in post.comments.all %}
-            <br/>
-            {{ comment.body }}
-            <br/>
-            <small><strong>{{ comment.name }} - {{ comment.date }}</strong></small>
+
+            <div class="toast-container position-static">
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">{{ comment.name | title }}</strong> | <small class="text-muted">{{ comment.date }}</small>
+                </div>
+                <div class="toast-body">
+                    {{ comment.body }}
+                </div>
+                </div>
+            </div>
+            <br>
+            
+            
         {% endfor %}
+        
         <br><br/>
         <!-- All users will be able to add there own comments -->
         <a href="{% url 'add_comment' post.pk %}" target="_blank" >Add a comment</a>
@@ -99,10 +115,14 @@
           <div class="col-md-10">
             <div class="card-body">
             <!-- The authors full name is displayed on the bio card -->
-              <h5 class="card-title">{{ post.author.first_name|title }} {{ post.author.last_name|title }}</h5>
+              
               <p class=" small text-muted">
+                {% if post.author.userprofile %}
             <!-- The link to the author's bio is displayed -->
               <a href="{% url 'view_profile' post.author.userprofile.id %}" target="_blank">View author's profile</a>
+                {% else %}
+                <p> This user has not created there profile yet</p>
+              {% endif %} 
             <!-- The user only sees links for the social media provided by the author. All links opend in a new tab -->
                 {% if post.author.userprofile.Website %}
                     <a href="{{ post.author.userprofile.Website }}" target="_blank">Website</a>
