@@ -1,6 +1,6 @@
 # django imports
-from myblog.models import Post, comment, Category
-from myblog.forms import PostForms, EditForm, CommentForm
+from .models import Post, comment, Category
+from .forms import PostForms, EditForm, CommentForm
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic import DetailView, DeleteView
@@ -124,8 +124,13 @@ class CommentView(SuccessMessageMixin, CreateView):
     # using html template to display comments
     template_name = 'comment.html'
 
+    # valid form id used to add username to comment
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
+
     # adds a message if the form is success using SuccessMessageMixin
-    success_message = " Thanks for sharing your thoughts in the Bloggerverse"
+    success_message = "Thanks for sharing your thoughts in the Bloggerverse"
 
 
 # displays add category page using django CreateView
@@ -141,7 +146,7 @@ class AddCategoryView(SuccessMessageMixin, CreateView):
     fields = '__all__'
 
     # redirects user to the post form if form successful
-    success_url = reverse_lazy('posts')
+    success_url = reverse_lazy('category_list')
 
     # adds a message if the form is successful using SuccessMessageMixin
     success_message = " We have added your category to the Bloggerverse"
