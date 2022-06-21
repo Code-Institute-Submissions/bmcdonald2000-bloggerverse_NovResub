@@ -9,43 +9,83 @@
     <br/>
     <!-- Once logged in users will be able to add their own posts using the post form-->
     {% if user.is_authenticated %}
-        <!-- delete form is displayed as a card -->
-        <div class="card">
+        {% if user.userprofile.Bio %}
+            <!-- delete form is displayed as a card -->
+            <div class="card">
 
-            <!-- boostrap black border -->
-            <div class="card border-secondary ">
-                
-                <!-- boostrap card body -->
-                <div class="card-body">
+                <!-- boostrap black border -->
+                <div class="card border-secondary ">
                     
-                    <!-- card title -->
-                    <h1 id="heading" class="card-title"> Add Your Post </h1>
-                    
-                    <!-- horizontal line -->
-                    <hr>
-                    <!-- line break -->
-                    <br/>
-                    <div class="form-group">
-                        <!-- form data is posted and allows images to be inserted by the user -->
-                        <form method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ form.media }}
-                            {{ form.as_p }}
-                            <button class="btn btn-info" style="background-color: #e5c6a0; border: #e5c6a0; color: #000000;"><i class="bi bi-check-circle-fill"></i> Post</button>
-                            <!-- line break -->
-                            <br><br/> 
-                            <!-- horizontal line -->
-                            <hr>
+                    <!-- boostrap card body -->
+                    <div class="card-body">
+                        
+                        <!-- card title -->
+                        <h1 id="heading" class="card-title"> Add Your Post </h1>
+                        
+                        <!-- horizontal line -->
+                        <hr>
+                        <!-- line break -->
+                        <br/>
+                        <div class="form-group">
+                            <!-- form data is posted and allows images to be inserted by the user -->
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form.media }}
+                                {{ form.as_p }}
+                                <button class="btn btn-info" style="background-color: #e5c6a0; border: #e5c6a0; color: #000000;"><i class="bi bi-check-circle-fill"></i> Post</button>
+                                <!-- line break -->
+                                <br><br/> 
+                                <!-- horizontal line -->
+                                <hr>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- line breaks -->
+            <br><br><br><br>
+            <!-- JS that tells the backend which user is creating the post -->
+            <script>
+                var name = "{{ user.id }}";
+                document.getElementById("username").value = name;
+            </script>
+        {% else %}
+        <!-- line break -->
+        <br>
+        <h1 id="heading"> You need to complete your <a href="{% url 'create_profile' %}">profile </a> setup up to add a post ! </p>
+        <br/>
+        <!-- Boostrap progress bar to let the user know how far into the profile set up they are -->
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" style="width: 95%">95%</div>
         </div>
-        <!-- line breaks -->
-        <br><br><br><br>
-        <!-- JS that tells the backend which user is creating the post -->
-        <script>
-            var name = "{{ user.id }}";
-            document.getElementById("username").value = name;
-        </script>
+
+        <!-- div makes it easier to style icon -->
+        <div class="stop">
+            <!-- boostrap stop icon -->
+            <i class="bi bi-slash-circle-fill"></i>
+        </div>
+
+        <!-- Line break -->
+        <br/>
+
+        {% endif %}
+        <br><br>
+            
+    {% else %}
+
+        <!-- For any user who is not logged in and manages to access this page they will be propmented to login-->
+        <h1>You need to <a href="{% url 'login' %}">login</a> or <a href="{% url 'sign_up' %}">signup</a>  to add a post.</h1>
+
+        <!-- Line break -->
+        <br/><br/><br/>
+
+        <!-- div makes it easier to style icon -->
+        <div class="stop">
+            <!-- boostrap stop icon -->
+            <i class="bi bi-slash-circle-fill"></i>
+        </div>
+                
+        <!-- Line break -->
+        <br/><br/><br/>
+                
     {% endif %}
 {% endblock%}
