@@ -16,17 +16,6 @@ body{
     color: #000;
     
 }
-/* all text with id 'heading' is centred */
-#heading{
-    text-align: center;
-}
-
-/* all icons with id 'icon' are black and 30px */
-#icons{
-    font-size: 30px;
-    color: #000;
-    
-}
 
 /* gives the container a black border */
 .container {
@@ -50,7 +39,11 @@ body{
 .categories-list a:hover {
     background-color: #e5c6a0;
 }
-
+.progress-bar{
+    width: 95%;
+    background-color: #e5c6a0;
+    color: #000;
+}
 /* styles the footer */
 footer{
     /* beige background */
