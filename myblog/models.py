@@ -65,7 +65,6 @@ class comment(models.Model):
     def __str__(self):
         return '%s - %s' % (self.post.title, self.name)
 
-
     # redirects user to the post form if form successful
     def get_absolute_url(self):
         return reverse('details', args=[str(self.post.pk)])
