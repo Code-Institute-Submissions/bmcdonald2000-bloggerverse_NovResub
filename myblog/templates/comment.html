@@ -7,9 +7,11 @@
 <!-- Template content -->
 {% block content %}
     {% if user.is_authenticated %}
-    <br/>
+    <!-- line break -->
+    <br><br><br><br>
         <!-- page header -->
         <h1 id="heading">Add Your Comment</h1>
+         <!-- line break -->
         <br/>
         <div class="form-group">
             <!-- form data is posted and allows images to be inserted by the user -->
@@ -17,7 +19,8 @@
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button class="btn btn-info" style="background-color: #e5c6a0; border: #e5c6a0; color: #000000;"><i class="bi bi-check-circle-fill"></i> Add Comment </button>
-                <br><br/> 
+                <!-- line break -->
+                <br><br><br><br>
         </div>
 
         <script>
