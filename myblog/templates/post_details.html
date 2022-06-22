@@ -9,10 +9,10 @@
     <br/>
      <!-- If the post author has a profile picture it shall be displayed. The profile pictures are hyperlinked making it easy for the users to view the auhtors profile. -->
     {% if post.author.userprofile.profile_picture %}
-        <a href="{% url 'view_profile' post.author.userprofile.id %}"><img src="{{ post.author.userprofile.profile_picture.url }}" align="right" width="100px" height="100px" class="rounded-circle"></a>
+        <a href="{% url 'view_profile' post.author.userprofile.id %}" target="_blank"><img src="{{ post.author.userprofile.profile_picture.url }}" align="right" width="100px" height="100px" class="rounded-circle"></a>
     <!-- If the post author has not uploaded a profile picture, a default image will be used. The profile pictures are hyperlinked making it easy for the users to view the auhtors profile. -->  
     {% else %}
-        <a href="{% url 'view_profile' post.author.userprofile.id %}"><img src="{{'/static/images/default.png'}}" align="right" width="100px" height="100px" class="rounded-circle"></a>
+        <a href="{% url 'view_profile' post.author.userprofile.id %}" target="_blank"><img src="{{'/static/images/default.png'}}" align="right" width="100px" height="100px" class="rounded-circle"></a>
     {% endif %}
     <!-- The post summary clicked on by the user will be displayed in full-->
 
