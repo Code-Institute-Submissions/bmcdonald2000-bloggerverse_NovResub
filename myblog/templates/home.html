@@ -36,7 +36,7 @@
                             <a href="{% url 'details' Post.pk %}" target="_blank">{{Post.title|title}}</a> 
                         </h5>
                         <!-- post summary is displayed --> 
-                        <p2>{{Post.summary}}</p>
+                        <p>{{Post.summary}}</p>
 
                         <!-- post category hyperlinked to display all post in that category. '|slugify' converts blank spaces between words into '-' to maintain good coding practices  -->  
                         <small><a href="{% url 'category_page' Post.category|slugify %}" target="_blank">{{Post.category|title}}</a> <i class="bi bi-tags-fill"></i></small>

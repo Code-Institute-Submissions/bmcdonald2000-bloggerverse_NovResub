@@ -25,14 +25,14 @@
         <div class="container-fluid">
           <img src="{{ '/static/images/logo.png' }}" alt="logo" width="100" height="70" class="d-inline-block">
           <a class="navbar-brand" href="{% url 'home' %}">
-            <i class="bi bi-house-door-fill" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
+            <i class="bi bi-house-door-fill d-inline-block align-text-top"></i>
             Home
           </a>
           <!-- If their are categories, catgeories are displayed in a droppdown.-->
           {% if category_menu %}
               <div class="nav-item dropdown">
                 <a class="navbar-brand dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="bi bi-folder" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
+                  <i class="bi bi-folder d-inline-block align-text-top"></i>
                 Categories
                 </a>
                 <!-- Dropdown elements display all of the categories  -->
@@ -48,23 +48,23 @@
           {% else %}
               <!-- For pages where a categories dropdown is not available, the categories page link will be visible -->
               <div class="nav-item">
-                <a class="navbar-brand" href="{% url 'category_list' %}"> <i class="bi bi-folder" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i> Categories</a>
+                <a class="navbar-brand" href="{% url 'category_list' %}"> <i class="bi bi-folder d-inline-block align-text-top"></i> Categories</a>
               </div>
           {% endif%}
 
           <!-- The following navabr elements are only dispalyed for authenticated users  -->
           {% if user.is_authenticated %}
             <a class="navbar-brand" href="{% url 'posts' %}">
-              <i class="bi bi-chat-left-text" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
+              <i class="bi bi-chat-left-text d-inline-block align-text-top"></i>
               Add Post
             </a>
             <a class="navbar-brand" href="{% url 'category' %}">
-              <i class="bi bi-folder-plus" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
+              <i class="bi bi-folder-plus d-inline-block align-text-top"></i>
               Add Category
             </a>
             <div class="nav-item dropdown">
               <a class="navbar-brand dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="bi bi-person-circle" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
+                <i class="bi bi-person-circle d-inline-block align-text-top"></i>
                 <!-- '|title '  capitalises the first letter of the username -->
               {{ user.username|title }}'s Profile
               </a>
@@ -82,17 +82,17 @@
             </div>
             <!-- For all users who are logged in they will see the logout button -->
             <a class="navbar-brand" href="{% url 'logout' %}">
-              <i class="bi bi-box-arrow-left" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
+              <i class="bi bi-box-arrow-left d-inline-block align-text-top"></i>
               Log out
             </a>
           {% else %}
             <!-- For all users who are not logged in they will have the option to login or signup -->
             <a class="navbar-brand" href="{% url 'sign_up' %}">
-              <i class="bi bi-person-plus-fill" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
+              <i class="bi bi-person-plus-fill d-inline-block align-text-top"></i>
               Sign up
             </a>
             <a class="navbar-brand" href="{% url 'login' %}">
-              <i class="bi bi-box-arrow-in-right" alt="icon" width="30" height="24" class="d-inline-block align-text-top"></i>
+              <i class="bi bi-box-arrow-in-right d-inline-block align-text-top"></i>
               Login
             </a>
           {% endif %}
@@ -133,7 +133,7 @@
 
       
   <footer class="footer mt-auto py-3 ">
-    <strong><p>Brieanna McDonald ©2022| Bloggerverse inc, all rights reserved</p></strong> <a href="https://github.com/bmcdonald2000" target="_blank" rel="noopener noreferrer"><i class='bi bi-github' id="icons"></i></a> <a href="mailto:bmcdonald1406@gmail.com" target="_blank" rel="noopener noreferrer"><i class='bi bi-envelope' id="icons"></i></a> <a href="https://www.linkedin.com/in/brieanna-mcdonald-0263b1212/" target="_blank"><i class="bi bi-linkedin" id="icons"></i></a> <a href="https://www.instagram.com/" target="_blank"><i class="bi bi-instagram" id ="icons"></i></a> <a href="https://twitter.com/?lang=en" target="_blank"><i class="bi bi-twitter" id="icons"></i></a>
+    <strong>Brieanna McDonald ©2022| Bloggerverse inc, all rights reserved</strong> <div id="icons"><a href="https://github.com/bmcdonald2000" target="_blank" rel="noopener noreferrer"><i class='bi bi-github'></i></a> <a href="mailto:bmcdonald1406@gmail.com" target="_blank" rel="noopener noreferrer"><i class='bi bi-envelope'></i></a> <a href="https://www.linkedin.com/in/brieanna-mcdonald-0263b1212/" target="_blank"><i class="bi bi-linkedin"></i></a> <a href="https://www.instagram.com/" target="_blank"><i class="bi bi-instagram"></i></a> <a href="https://twitter.com/?lang=en" target="_blank"><i class="bi bi-twitter"></i></a></div>
   </footer>
   </body>
 </html>
