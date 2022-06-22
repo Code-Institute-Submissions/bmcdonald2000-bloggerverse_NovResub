@@ -35,7 +35,17 @@
         {% endif %}
     <!-- user will be prompted to log in or return home -->
     {% else %} 
-        <small><a href="{% url 'login' %}">login</a> to edit your profile or return <a href="{% url 'home' %}">home</a></small> 
+    <!-- Line break -->
+    <br><br><br><br>
+        <p id="heading"><a href="{% url 'login' %}">login</a> to edit your profile or return <a href="{% url 'home' %}">home</a></p>
+        
+            <!-- div makes it easier to style icon -->
+            <div class="stop">
+                <!-- boostrap stop icon -->
+                <i class="bi bi-slash-circle-fill"></i>
+            </div>
+            <!-- Line break -->
+            <br><br><br><br>
     {% endif %}
 
 {% endblock %}
