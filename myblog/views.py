@@ -6,6 +6,7 @@ from django.views.generic import ListView, CreateView, UpdateView
 from django.views.generic import DetailView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy, reverse
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 
 
@@ -105,11 +106,17 @@ class DeletePostView(SuccessMessageMixin, DeleteView):
     # using html template to display delete post page
     template_name = 'delete.html'
 
-    # if post is deleted user is returned to homepage
-    success_url = reverse_lazy('home')
-
     # adds a message if the form is success using SuccessMessageMixin
     success_message = " Your post was deleted from the Bloggerverse "
+
+    # function to show success message for delete view
+    def delete(self, request, *args, **kwargs):
+        obj = self.get_object()
+        messages.success(self.request, self.success_message % obj.__dict__)
+        return super(DeletePostView, self).delete(request, *args, **kwargs)
+
+    # if post is deleted user is returned to homepage
+    success_url = reverse_lazy('home')
 
 
 # displays comments page using django CreateView
