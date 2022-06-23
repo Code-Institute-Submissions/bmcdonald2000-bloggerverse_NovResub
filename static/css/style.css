@@ -11,16 +11,14 @@ body{
 }
 
 /* all icons with id 'icon' are black and 30px */
-#icons{
+.icons{
     font-size: 30px;
     color: #000;
-    
 }
 
 /* gives the container a black border */
 .container {
     border-color: #000;
-
 }
 
 /* styles the stop message that appears when a user is trying to gain acess to a page they're unauthorised to access */
