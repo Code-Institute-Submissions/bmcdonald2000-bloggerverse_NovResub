@@ -10,7 +10,7 @@ body{
     text-align: center;
 }
 
-/* all icons with id 'icon' are black and 30px */
+/* all icons with class 'icon' are black and 30px */
 .icons{
     font-size: 30px;
     color: #000;
