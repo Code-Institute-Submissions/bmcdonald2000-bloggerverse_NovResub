@@ -1,0 +1,55 @@
+/* imports the google font space mono */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+
+/* adds google  font space mono to all body text */
+body{
+    font-family: 'Space Mono', monospace;
+}
+/* all text with id 'heading' is centred */
+#heading{
+    text-align: center;
+}
+
+/* all icons with class 'icon' are black and 30px */
+.icons{
+    font-size: 30px;
+    color: #000;
+}
+
+/* gives the container a black border */
+.container {
+    border-color: #000;
+}
+
+/* styles the stop message that appears when a user is trying to gain acess to a page they're unauthorised to access */
+.stop{
+    /* font is 250 px so it is always clear*/
+    font-size: 250px;
+    
+    /* stop icon is red so they know to stop */
+    color: #ff0000;
+    
+    /* text is centerised so it's easier for user to read */
+    text-align: center;
+}
+
+/* when hovering over the categories in categories list background colour changes to beige */
+.categories-list a:hover {
+    background-color: #e5c6a0;
+}
+.progress-bar{
+    width: 95%;
+    background-color: #e5c6a0;
+    color: #000;
+}
+/* styles the footer */
+footer{
+    /* beige background */
+    background-color: #e5c6a0;
+    /* always full width of the page */
+    width: 100%;
+    
+    
+    /* all fotter text is displyed in the center */
+    text-align: center;
+}
