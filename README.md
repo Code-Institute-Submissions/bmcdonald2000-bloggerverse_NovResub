@@ -1,7 +1,7 @@
 # Bloggerverse
-<img src="static/images/logo.png" alt="Logo" width="350px" height="250px" >
+<img src="static/images/logo.png" alt="Logo" width="350px" height="250px">
 
-<img src="static/images/responsive.png" alt="responsive" width="550px" height="350px" >
+<img src="static/images/responsive.png" alt="responsive" width="550px" height="350px">
 
 :globe_with_meridians: [Live Website](https://bloggerverse.herokuapp.com/),
 
@@ -34,7 +34,7 @@ Bloggerverse is a blogsite for people intrested in cultivating a blogging commun
 ### User Stories :scroll:
 
 
-When designing my user stories I used the moSCow prioritisation technique and designed the user story table to help keep the project on track. The meaning of each label can be found in the key below. :point_down:
+When designing my user stories I used the Agile MoSCoW prioritisation technique and designed the user story table to help keep the project on track. The meaning of each label can be found in the key below. :point_down:
 
 **Key:**
 
@@ -47,29 +47,41 @@ When designing my user stories I used the moSCow prioritisation technique and de
 
 **Table:**
 
-|User Type|   User Story |  Priority	|
-|-----------------|-----------|-----------|
-|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to view blog posts, without logging in or signing up | <img src="https://img.shields.io/badge/-Must%20Have-green">| 
-| <img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to view blog posts snippets from the home page | <img src="https://img.shields.io/badge/-Must%20Have-green">| 
-| <img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to view detailed blog posts easily| <img src="https://img.shields.io/badge/-Must%20Have-green">| 
-| <img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to add my own blog posts| <img src="https://img.shields.io/badge/-Must%20Have-green">|
-|<img src="https://img.shields.io/badge/-Site%20User-blue">| I want to be able to edit my own blog posts|<img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
-| <img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to delete my own blog posts| <img src="https://img.shields.io/badge/-Must%20Have-green">|
-|<img src="https://img.shields.io/badge/-Site%20User-blue">| I want to be to add comments to blog posts|<img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
-| <img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to like/dislike blog posts| <img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
-| <img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to see the number of likes a posts has| <img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
-|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to sign up | <img src="https://img.shields.io/badge/-Must%20Have-green">|
-|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to login/logout | <img src="https://img.shields.io/badge/-Must%20Have-green">|
-| <img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be notified when an action is successful/unsuccessful| <img src="https://img.shields.io/badge/-Should%20Have-blueviolet">| 
-|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to create my own profile | <img src="https://img.shields.io/badge/-Could%20Have-yellow">| 
-| <img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to view/edit my profile| <img src="https://img.shields.io/badge/-Could%20Have-yellow">| 
-| <img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to view the post authors profile| <img src="https://img.shields.io/badge/-Could%20Have-yellow">| 
-| <img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to reset my password| <img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
-|<img src="https://img.shields.io/badge/-Site%20User-blue">|I want to be able to report offenesive content|<img src="https://img.shields.io/badge/-Wont%20Have-red">|
-|<img src="https://img.shields.io/badge/-Site%20Admin-lightgrey">|I want to be able to easily manage posts, users and comments|<img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
-|<img src="https://img.shields.io/badge/-Site%20Admin-lightgrey">|I want to have my own admin area|<img src="https://img.shields.io/badge/-Must%20Have-green">|
-|<img src="https://img.shields.io/badge/-Site%20Admin-lightgrey">|I want to be able to add my own posts and comments|<img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
-|<img src="https://img.shields.io/badge/-Site%20User-blue">|I want to be able to use other social media to login|<img src="https://img.shields.io/badge/-Wont%20Have-red">|
+The Table below shows the user stories for this project. These user stories ID links to the issue number displayed in the Kanban board (can be found in the projects sectiion) and does not reflect the order in which these stories where completed.
+
+The Stories in the Kanban board contain the agreed acceptance criteria in the form of tasks so that an agile technique is used to track the development of the user stories and the project itself.
+
+
+|User Story ID|User Type|User Story|Priority| 
+|-----|-----|-----|-----|
+|01|<img src="https://img.shields.io/badge/-Site%20User-blue">|I want to be able to view blog posts, without logging in or signing up|<img src="https://img.shields.io/badge/-Must%20Have-green">| 
+|02|<img src="https://img.shields.io/badge/-Site%20User-blue">|I want to be able to view blog posts snippets from the home page| <img src="https://img.shields.io/badge/-Must%20Have-green">
+|03 |<img src="https://img.shields.io/badge/-Site%20User-blue">|I want to be able to view detailed blog posts easily| <img src="https://img.shields.io/badge/-Must%20Have-green">|
+|04|<img src="https://img.shields.io/badge/-Site%20User-blue">|I want to be able to add my own blog posts| <img src="https://img.shields.io/badge/-Must%20Have-green">|
+|05|<img src="https://img.shields.io/badge/-Site%20User-blue">| I want to be able to edit my own blog posts|<img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
+|06|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to delete my own blog posts| <img src="https://img.shields.io/badge/-Must%20Have-green">|
+|07|<img src="https://img.shields.io/badge/-Site%20User-blue">| I want to be to add comments to blog posts|<img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
+|08|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to like/dislike blog posts| <img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
+|09|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to see the number of likes a posts has| <img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
+|10|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to sign up | <img src="https://img.shields.io/badge/-Must%20Have-green">|
+|11|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to login/logout | <img src="https://img.shields.io/badge/-Must%20Have-green">|
+|12|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be notified when an action is successful/unsuccessful| <img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
+|13|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to create my own profile | <img src="https://img.shields.io/badge/-Could%20Have-yellow">|
+|14|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to view/edit my profile| <img src="https://img.shields.io/badge/-Could%20Have-yellow">|
+|15|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to view the post authors profile| <img src="https://img.shields.io/badge/-Could%20Have-yellow">|
+|16|<img src="https://img.shields.io/badge/-Site%20User-blue">|  I want to be able to reset my password| <img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
+|17|<img src="https://img.shields.io/badge/-Site%20User-blue">|I want to be able to report offenesive content|<img src="https://img.shields.io/badge/-Wont%20Have-red">|
+|18|<img src="https://img.shields.io/badge/-Site%20Admin-lightgrey">|I want to be able to easily manage posts, users and comments|<img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
+|19|<img src="https://img.shields.io/badge/-Site%20Admin-lightgrey">|I want to have my own admin area|<img src="https://img.shields.io/badge/-Must%20Have-green">|
+|20|<img src="https://img.shields.io/badge/-Site%20Admin-lightgrey">|I want to be able to add my own posts and comments|<img src="https://img.shields.io/badge/-Should%20Have-blueviolet">|
+|21|<img src="https://img.shields.io/badge/-Site%20User-blue">|I want to be able to use other social media to login|<img src="https://img.shields.io/badge/-Wont%20Have-red">|
+
+
+**Kanban Board**
+
+Below :point_down: are screenshot of the Kanban board, all stories witin the scope of this project have been completed. The Stories that will not be implemented in this release have been closed as wont fix and moved to the backlog, where they may be reconsidered for future releases.
+
+<img src="static/images/Kanban_Board.png" alt="Kanban Board" width="450px" height="250px">
 
 ### Design :art:
 
